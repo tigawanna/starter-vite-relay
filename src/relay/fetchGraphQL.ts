@@ -21,10 +21,6 @@ async function fetchGraphQL(text:any, variables:any) {
   );
 
   const res = await response.json()
-  console.log(
-    "response ==== ",
-      res
-  );
   if(!response.ok){
     throw new Error(res.message,res)
   }

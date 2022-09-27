@@ -1,3 +1,4 @@
+<script src="https://cdn.tailwindcss.com"></script>
 # Starter files for vite with react and tailwindcss
 
 ### *clone the repo and do `npm install` and do `npm update` if necesary*
@@ -78,6 +79,8 @@ ideal use cases for relay
 - the prefetching feature in `usePreloadedQuery` which is recomemnded fetch strategy is not supprted in react-router but this can be side sepped by just using `uselazyLadedQuery` instead
 - requires the server to have a [compliant schema](https://relay.dev/docs/next/guides/graphql-server-specification/) 
 in my case am using the github graphql api , but if you had your own server yu culd use something like [Hasura](https://hasura.io/) or just follw the spec specified when making your own
+> you can transform your response before it's passed into the provider if you still want to use it with our current data [like shown in this tutorial](https://dev.to/ttoss/lett-s-go-build-pagination-with-relay-and-react-an-intermediary-tutorial-f89)
+
 
 
 ### usage 
@@ -273,3 +276,26 @@ lastly , it (relay-compiler) generates types for you , they have a weird ting wi
 ```
 
 ### [full code](https://github.com/tigawanna/starter-vite-relay)
+[the article link](https://dev.to/tigawanna/my-experience-with-graphql-relay-vite-and-github-api-5b97)
+
+#### helpfull references
+[relay pagination tutorial](https://dev.to/ttoss/lett-s-go-build-pagination-with-relay-and-react-an-intermediary-tutorial-f89)
+
+[another helpfull article](https://dev.to/zth/pagination-with-minimal-effort-in-relay-gl4)
+
+[brief video explanation](https://www.youtube.com/watch?v=xnvzz7Z658I&t=25s)
+
+[graphql client playground](https://graphiql-online.com/graphiql)
+
+to configure for github graphql api just add your personal access token in the headers and cchange the endpoint
+
+![gql playground by hasura](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ksfsjnutl76n3apkbsw9.png)
+
+and test out queries , hit ctrl spacebar to get autocomplete
+and field suggstion.
+
+this package and the compiler rely on babel , i sued vite react fro this projectandit doesn't use babel as the build tool but there's [a plugin that helaps with that](https://www.npmjs.com/package/vite-plugin-relay)
+
+Also just in case you're building something fromthe ground up consider a [different router](https://stackoverflow.com/questions/68358785/how-do-i-use-react-router-with-relay)
+
+<h3 class="bg-slate-400">--- The End ---</h3>

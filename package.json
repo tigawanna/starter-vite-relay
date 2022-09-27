@@ -1,0 +1,71 @@
+{
+  "name": "starter-vite",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "relay": "yarn run relay-compiler",
+    "dev": "yarn run relay && vite ",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "gen": "graphql-codegen --config codegen.yml"
+  },
+  "dependencies": {
+    "@types/react-relay": "^14.1.1",
+    "@types/relay-runtime": "^14.1.3",
+    "axios": "^0.27.2",
+    "babel-plugin-relay": "^14.1.0",
+    "dayjs": "^1.11.5",
+    "graphql": "^16.6.0",
+    "graphql-request": "^5.0.0",
+    "graphql-tag": "^2.12.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.4.0",
+    "react-query": "^3.39.2",
+    "react-relay": "^14.1.0",
+    "react-router-dom": "^6.4.0",
+    "relay-compiler": "^14.1.0",
+    "relay-runtime": "^14.1.0",
+    "uniqid": "^5.4.0",
+    "vite-plugin-relay": "^2.0.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "2.12.1",
+    "@graphql-codegen/introspection": "2.2.1",
+    "@graphql-codegen/typescript": "^2.7.3",
+    "@graphql-codegen/typescript-operations": "^2.5.3",
+    "@graphql-codegen/typescript-react-apollo": "3.3.3",
+    "@graphql-codegen/typescript-react-query": "^4.0.1",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "@types/uniqid": "^5.3.2",
+    "@vitejs/plugin-react": "^2.1.0",
+    "autoprefixer": "^10.4.10",
+    "postcss": "^8.4.16",
+    "tailwind-scrollbar": "^2.0.1",
+    "tailwindcss": "^3.1.8",
+    "typescript": "^4.6.4",
+    "vite": "^3.1.0"
+  },
+  "relay": {
+    "src": "./src",
+    "schema": "schema.docs.graphql",
+    "language": "typescript",
+    "eagerEsModules": true,
+    "exclude": [
+      "**/node_modules/**",
+      "**/__mocks__/**",
+      "**/__generated__/**"
+    ]
+  }
+}
+
+
+
+
+
+
+
+
+

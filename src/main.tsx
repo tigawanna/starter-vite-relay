@@ -1,70 +1,39 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
+import { BrowserProtocol, queryMiddleware } from 'farce';
 import './index.css'
-
 import {
-  RelayEnvironmentProvider,
-  loadQuery,
-  graphql,
-  usePreloadedQuery,
-} from 'react-relay/hooks';
-import RelayEnvironment from './relay/RelayEnviroment'
-import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
-import { HomeTabQuery } from './components/home/__generated__/HomeTabQuery.graphql';
-import { mainRepoQuery } from './__generated__/mainRepoQuery.graphql';
-import { mainVIEWERQuery } from './__generated__/mainViewerQuery.graphql';
+  createFarceRouter,
+  createRender,
+
+} from 'found';
+import { Resolver } from 'found-relay';
+import ReactDOM  from 'react-dom/client';
+import environment from './relay/RelayEnviroment'
+import { Suspense } from 'react';
 import ErrorBoundary from './components/Shared/ErrorBoundary';
-import { LoadingShimmer } from './components/Shared/LoadingShimmer';
-
-const rq_config = {
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      retry: false,
-      staleTime: 5 * 60 * 1000,
-    },
-  },
-}
-
-export const MAINVIEWER = graphql`
-# github graphql query to get more details  
-  query mainVIEWERQuery{
-   viewer{
-    name
-    email
-    bio
-   }
-  }
-`;
+import { Loading } from './components/Shared/Loading';
+import  router from './routes'
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
 
 
-const preloadedQuery = loadQuery<mainVIEWERQuery>(RelayEnvironment, MAINVIEWER, {
-  /* query variables */
+
+
+const Router = createFarceRouter({
+  historyProtocol: new BrowserProtocol(),
+  historyMiddlewares: [queryMiddleware],
+  routeConfig:router,
+  render: createRender({}),
 });
 
 
-const queryClient = new QueryClient(rq_config);
-const { Suspense } = React;
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-
-  <RelayEnvironmentProvider environment={RelayEnvironment}>
-    <Suspense fallback={<LoadingShimmer/>}>
-
-  <QueryClientProvider client={queryClient}>
-    <ReactQueryDevtools initialIsOpen={false} position={"top-left"} />
-    <React.StrictMode>
-      <ErrorBoundary>
-        <App preloadedQuery={preloadedQuery} />
-        </ErrorBoundary>
-    </React.StrictMode>
-  </QueryClientProvider>
-    </Suspense>
-  </RelayEnvironmentProvider>
-
+  <div className='min-h-screen w-full flex-center'>
+ <ErrorBoundary>
+  <Suspense fallback={<Loading size={50}/>}>
+  {/* @ts-ignore */}
+   <Router resolver={new Resolver(environment)} />
+  </Suspense>
+  </ErrorBoundary>   
+  </div>
 );
-
-

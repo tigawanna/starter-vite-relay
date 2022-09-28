@@ -12,7 +12,7 @@
 - **react-icons**
 
 
-### [costom components](src\components\Shared)
+### [custom components](src\components\Shared)
 
 ### [resct-query](src\main.tsx) :
 is preconfigured feel free to omit the defaultConfig if you want default behaviour

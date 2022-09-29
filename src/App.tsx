@@ -1,72 +1,30 @@
-import { useState } from 'react'
-import { useQuery } from 'react-query';
-import { Routes, Route, BrowserRouter } from "react-router-dom";
-import './App.css'
-import { ProtectedRoute } from './components/auth/PrivateRoutes';
-import { Home } from './components/home/Home';
-import { Test } from './components/test/Test';
-import { Toolbar } from './components/toolbar/Toolbar';
-
 import {
-  PreloadedQuery,
-  RelayEnvironmentProvider,
-  usePreloadedQuery,
+  createHashHistory,Outlet,
+  ReactLocation,Router } from '@tanstack/react-location';
+import React from 'react'
+import { ReactLocationDevtools } from 'react-location-devtools';
+import { Toolbar } from './components/Navigation/Toolbar/Toolbar';
 
-} from 'react-relay/hooks';
-import RelayEnvironment from './relay/RelayEnviroment';
-import React from 'react';
-import { OperationType } from 'relay-runtime';
+import ErrorBoundary from './components/Shared/ErrorBoundary';
+import { routes } from './routes';
 
-import { HomeTabQuery } from './components/home/__generated__/HomeTabQuery.graphql';
-import { mainRepoQuery } from './__generated__/mainRepoQuery.graphql';
-import { MAINVIEWER } from './main';
-import { mainVIEWERQuery } from './__generated__/mainViewerQuery.graphql';
+interface AppProps {
 
-const var_token = { token: import.meta.env.VITE_TOKEN };
-interface AppTypes{
-
-  preloadedQuery: PreloadedQuery<mainVIEWERQuery, {}>
 }
-function App({preloadedQuery}:AppTypes) {
 
-const [token, setToken] = useState<string>(var_token.token);
-const { Suspense } = React;
+const history = createHashHistory()
+const location = new ReactLocation({ history })
 
-const data = usePreloadedQuery<mainVIEWERQuery>(MAINVIEWER,preloadedQuery);
-
-
+const App: React.FC<AppProps> = ({}) => {
+  
 return (
-    <div
-     className="h-screen w-screen   scroll-bar flex-col-center 
-    dark-styles transition duration-500 overflow-x-hidden "
-    >
-    <BrowserRouter >
-
-        <div className="fixed top-[0px] w-[100%] z-40">
-          <Toolbar />
-        </div>
-
-
-        <div className="w-full h-full mt-12 ">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute >
-                  <Home token={token} data={data}/>
-                </ProtectedRoute>
-              }
-            />
-
-            <Route path="/test" element={<Test token={token} />} />
-          </Routes>
-        </div>
-
-      </BrowserRouter>
-      
-
-    </div>
-  );
+ <div className='min-h-screen h-full  w-full'>
+    <Router location={location} routes={routes}>
+      <Toolbar/>
+      <Outlet />
+    </Router>
+ </div>
+);
 }
 
 export default App

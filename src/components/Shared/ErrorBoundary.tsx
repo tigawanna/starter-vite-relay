@@ -28,7 +28,7 @@ class ErrorBoundary extends Component<Props, State> {
     }
 
     public render() {
-        console.log("error boundary =",this.state.error?.message)
+        console.log("error boundary =",this.state.error)
         if (this.state.hasError) {
             if (this.state.error?.message === "Bad credentials") {
                return <Login/>
@@ -36,8 +36,11 @@ class ErrorBoundary extends Component<Props, State> {
             return(
                 <div className="w-full min-h-screen h-full flex-center">
                     <div className="w-[50%] p-2 flex-center bg-red-100 text-red-600">
+                        Something went wrong
                      {this.state.error?.message}
+                    
                    </div>
+            
                 </div>
             );
         }

@@ -1,6 +1,10 @@
 // your-app-name/src/fetchGraphQL.js
+import { useLocalStoreValues } from "./../store";
+
+
 async function fetchGraphQL(text:any, variables:any) {
 
+ const localdata = useLocalStoreValues.getState(); 
 
 // Fetch data from GitHub's GraphQL API:
   const response = await fetch(
@@ -10,7 +14,8 @@ async function fetchGraphQL(text:any, variables:any) {
       headers: {
         Authorization: `bearer ${
           import.meta.env.VITE_TOKEN
-        }`,
+        }`
+,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({

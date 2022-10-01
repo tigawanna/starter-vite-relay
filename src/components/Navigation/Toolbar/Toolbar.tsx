@@ -1,6 +1,5 @@
 import React from 'react'
-import { GrHome } from "react-icons/gr";
-import { TheIcon } from './../../Shared/TheIcon';
+
 import {
 createHashHistory,
   Link,
@@ -13,6 +12,9 @@ createHashHistory,
 import { Consent } from './../../modal/Consent';
 import { useLocalStoreValues } from './../../../store';
 import { BsSunFill, BsFillMoonFill,BsMenuDown } from "react-icons/bs";
+import { GrHome } from "react-icons/gr";
+import { RiHome2Line } from "react-icons/ri";
+import { TheIcon } from './../../Shared/TheIcon';
 import { useTheme } from './../../../utils/useTheme';
 
 interface ToolbarProps {
@@ -23,24 +25,23 @@ export const Toolbar: React.FC<ToolbarProps> = () => {
 const [open, setOpen] = React.useState(false)
 const localdata = useLocalStoreValues(); 
 const logout = () => { localdata.updateToken(null)}
-
-
- const theme = useTheme()
+const theme = useTheme()
   const nextTheme = theme.theme=== 'dark' ? 'light' : 'dark'
   const mode = theme.theme === "dark" ? BsSunFill : BsFillMoonFill;
   const toggle = () => { theme.setTheme(nextTheme) }
 
-console.log('user results === ',localdata, nextTheme)
+
 return (
-  <div className="w-[100%] bg-slate-200 dark:bg-slate-700 h-[60px] max-h-[50px] flex-center">
+  <div className="w-[100%] bg-slate-300 border-b dark:text-white  dark:bg-black h-[60px] max-h-[50px] 
+  flex-center transition ease-linear delay-100">
     {open ? (
       <Consent setOpen={setOpen} message={"Sign Out?"} action={logout} />
     ) : null}
     <div className="flex items-center justify-between w-full text-lg font-bold ">
       {/* home link */}
-      <div className="w-fit p-1  flex-center bg-white">
+      <div className="w-fit p-1  flex-center  ">
         <Link to="/">
-          <TheIcon Icon={GrHome} size={"25"} color={""} />
+          <TheIcon Icon={RiHome2Line} size={"25"} color={""}/>
         </Link>
       </div>
       {/* theme toggle */}
@@ -49,7 +50,7 @@ return (
       </div>
       {/* test */}
 
-      <div className="w-fit p-1  flex-center bg-white">
+      <div className="w-fit p-1  flex-center ">
         <Link to="/test">
          test
         </Link>

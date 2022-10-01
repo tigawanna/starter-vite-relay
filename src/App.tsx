@@ -20,11 +20,20 @@ const App: React.FC<AppProps> = ({}) => {
 
 
 return (
- <div className='min-h-screen h-full  w-full'>
+  <div className='h-screen w-full dark:bg-slate-800 dark:text-white transition ease-linear delay-100 
+  last:overflow-y-hidden'>
      <ErrorBoundary>
-    <Router location={location} routes={routes}>
+     <Router location={location} routes={routes}>
+
+      <div className="fixed top-0 w-full z-30 h-[10%]">
       <Toolbar/>
-      <Outlet />
+      </div>
+        
+        <div className="mt-[55px] w-full h-[90%]">
+          <Outlet />
+        </div>
+       
+
     </Router>
     </ErrorBoundary>
  </div>

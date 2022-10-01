@@ -16,13 +16,17 @@ const history = createHashHistory()
 const location = new ReactLocation({ history })
 
 const App: React.FC<AppProps> = ({}) => {
-  
+
+
+
 return (
  <div className='min-h-screen h-full  w-full'>
+     <ErrorBoundary>
     <Router location={location} routes={routes}>
       <Toolbar/>
       <Outlet />
     </Router>
+    </ErrorBoundary>
  </div>
 );
 }

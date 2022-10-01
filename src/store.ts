@@ -28,7 +28,8 @@ export const useLocalStoreValues =
                 ...state?.localValues,
                 theme,
               },
-            })),
+            })
+            ),
           updateToken: (token) =>
             set((state) => ({
               localValues: {

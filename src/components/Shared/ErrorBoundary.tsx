@@ -1,5 +1,6 @@
 import React, { Component, ErrorInfo, ReactNode } from "react";
 import { Login } from "../auth/Login";
+import { Navigate } from "@tanstack/react-location";
 
 interface Props {
     children?: ReactNode;
@@ -31,7 +32,7 @@ class ErrorBoundary extends Component<Props, State> {
         console.log("error boundary =",this.state.error)
         if (this.state.hasError) {
             if (this.state.error?.message === "Bad credentials") {
-               return <Login/>
+                return <Navigate to="/login" />;
             }    
             return(
                 <div className="w-full min-h-screen h-full flex-center">

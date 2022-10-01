@@ -1,7 +1,7 @@
 import React from 'react'
 import TheForm from '../Shared/form/TheForm';
 import { useLocalStoreValues } from './../../store';
-
+import { Navigate } from "@tanstack/react-location";
 interface LoginProps {
 
 }
@@ -17,11 +17,13 @@ interface Validate {
 }
 
 export const Login: React.FC<LoginProps> = ({}) => {
+const token = useLocalStoreValues(state => state?.localValues?.token)  
 const updateToken=useLocalStoreValues(state=>state.updateToken)
 
-    const handleSubmit = async (data: any) => {
-      updateToken(data.token)
-    };
+const handleSubmit = async (data: any) => {
+   updateToken(data.token)
+  return <Navigate to="/" />;
+};
 
 const validate = ({ input, setError }: Validate) => {
   return true

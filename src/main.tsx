@@ -25,9 +25,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <RelayEnvironmentProvider environment={RelayEnvironment}>
     <Suspense fallback={<LoadingShimmer/>}>
       <React.StrictMode>
-      <ErrorBoundary>
+      
         <App/>
-      </ErrorBoundary>
+   
      </React.StrictMode>
      </Suspense>
   </RelayEnvironmentProvider>

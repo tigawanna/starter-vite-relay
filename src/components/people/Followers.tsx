@@ -34,7 +34,7 @@ const data = query.data as ROOTFOLLOWERS;
           });
         })}
       </div>
-      {!query.isFetchingNextPage && hasMore ? (
+      {/* {!query.isFetchingNextPage && hasMore ? (
         <button
           className="m-2 hover:text-purple-400 shadow-lg hover:shadow-purple"
           onClick={() => {
@@ -48,35 +48,35 @@ const data = query.data as ROOTFOLLOWERS;
       <div className="w-full flex-center ">
         <Loading size={20} />
       </div>
-      ) : null}
+      ) : null} */}
     </div>
   );
 };
 
 
-// export const FollowersFragment = graphql`
-//   fragment Followers_followers on User
-//   @argumentDefinitions(
-//     first: { type: "Int", defaultValue: 10 }
-//     after: { type: "String" }
-//   )
-//   @refetchable(
-//     queryName: "FollowersPaginationQuery"
-//   ) {
-//     followers(first: $first, after: $after)
-//        @connection(key: "Followers_followers") {
-//       edges {
-//         node {
-//         ...Profile_user 
-//         }
-//       }
-//       pageInfo {
-//         endCursor
-//         hasNextPage
-//         hasPreviousPage
-//         startCursor
-//       }
-//       totalCount
-//     }
-//   }
-// `;
+export const FollowersFragment = graphql`
+  fragment Followers_followers on User
+  @argumentDefinitions(
+    first: { type: "Int", defaultValue: 10 }
+    after: { type: "String" }
+  )
+  @refetchable(
+    queryName: "FollowersPaginationQuery"
+  ) {
+    followers(first: $first, after: $after)
+       @connection(key: "Followers_followers") {
+      edges {
+        node {
+         id
+        }
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+        startCursor
+      }
+      totalCount
+    }
+  }
+`;

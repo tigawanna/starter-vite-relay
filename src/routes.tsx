@@ -1,11 +1,6 @@
-
-import { graphql, loadQuery } from 'react-relay/hooks';
-import App from './App';
 import { Home } from './components/home/Home';
 import { Test } from './components/test/Test';
 import { Login } from './components/auth/Login';
-import RelayEnvironment from './relay/RelayEnviroment'
-import { routesROOTVIEWERQuery } from './__generated__/routesROOTVIEWERQuery.graphql';
 import { DefaultGenerics, Route } from '@tanstack/react-location';
 
 
@@ -13,11 +8,43 @@ import { DefaultGenerics, Route } from '@tanstack/react-location';
 // # github graphql query to get more details
 //   query routesROOTVIEWERQuery{
 //    viewer{
-//    ...ProfileInfo_user
+//     id
+//     name
+//     login
+//     email
+//     bio
+//     avatarUrl
+//     company
+//     twitterUsername
+//     createdAt
+//     isFollowingViewer
+//     viewerIsFollowing
+//     isViewer
+//     location
+//     url
+
+//     followers(first: 1) {
+//       totalCount
+//       nodes {
+//         id
+//       }
+//     }
+//     following(first: 1) {
+//       totalCount
+//       nodes {
+//         id
+//       }
+//     }
+    
+//   repositories(first:1){
+//    totalCount
+//     nodes{
+//       id
+//     }
+//     }
 //    }
 //   }
 // `;
-
 
 
 // const RootQueryRef = loadQuery<routesROOTVIEWERQuery>(
@@ -40,13 +67,12 @@ import { DefaultGenerics, Route } from '@tanstack/react-location';
 // )
 
 
-export const routes: Route<DefaultGenerics>[] = [
-  { path: "/", 
-  element: <Home/>,
-    // loader: () => ({
-    //   viewer: loadQuery<routesROOTVIEWERQuery>(RelayEnvironment, ROOTVIEWER, {})
-    // })
-   },
-  {path: "test", element: <Test/>},
-  { path: "login", element: <Login/> },
-]
+export const blankroutes: Route<DefaultGenerics>[] = [
+    // {
+    //   path: "/",
+    //   element: <Home />,
+    //  },
+    // { path: "test", element: <Test /> },
+    // { path: "login", element: <Login /> },
+  
+  ]

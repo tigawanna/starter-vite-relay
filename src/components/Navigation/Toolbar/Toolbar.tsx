@@ -29,8 +29,7 @@ const theme = useTheme()
   const nextTheme = theme.theme=== 'dark' ? 'light' : 'dark'
   const mode = theme.theme === "dark" ? BsSunFill : BsFillMoonFill;
   const toggle = () => { theme.setTheme(nextTheme) }
-  const stuff = useMatch()
-  console.log("stuff.data.viewer in toolbar",stuff)
+
 return (
   <div className="w-[100%] bg-slate-300 border-b dark:text-white  dark:bg-black h-[60px] max-h-[50px] 
   flex-center transition ease-linear delay-100">

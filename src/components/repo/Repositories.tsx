@@ -20,11 +20,10 @@ import { graphql } from 'relay-runtime';
 
 dayjs.extend(relativeTime)
 interface RepositoryProps {
-username:string|undefined
-token:string
+
 }
 
-export const Repositories: React.FC<RepositoryProps> = ({username,token}) => {
+export const Repositories: React.FC<RepositoryProps> = ({}) => {
 const [keyword, setKeyword] = useState({word:''})
 
 // console.log("repo props ===   ==== ",username,token)
@@ -36,7 +35,7 @@ const action = () => {
   // results.items = []
 };
 
-
+const query:any={}
 const results:any = {}
 const data = query.data as ROOTREPO;
 const totalRepsLoaded = data?.pages[0]?.user?.repositories?.edges?.length
@@ -76,13 +75,13 @@ return (
       {repos?.map((repo) => {
         return repo?.user?.repositories?.edges.map((item) => {
           return (
-            <RepoCard repo={item.node} key={item.node?.id} token={token} />
+            <RepoCard repo={item.node} key={item.node?.id} />
           );
         });
       })}
     </div>
 
-    {!query.isFetchingNextPage && hasMore ? (
+    {/* {!query.isFetchingNextPage && hasMore ? (
       <button
         className="m-2 hover:text-purple-400 shadow-lg hover:shadow-purple"
         onClick={() => {
@@ -96,7 +95,7 @@ return (
       <div className="w-full flex-center ">
         <Loading size={20} />
       </div>
-    ) : null}
+    ) : null} */}
   </div>
 );
 }
@@ -108,10 +107,10 @@ return (
 
 interface RepoCardProps {
 repo:REPONODE
-token:string
+
 }
 
-export const RepoCard: React.FC<RepoCardProps> = ({repo,token}) => {
+export const RepoCard: React.FC<RepoCardProps> = ({repo}) => {
 // console.log(repo.html_url)
 // const repo_link = authedurl(repo.html_url,token)
 const vslink = `https://vscode.dev/${repo.url}`;
@@ -199,29 +198,29 @@ return (
 
 
 
-// export const RepositoriesFragment = graphql`
-//   fragment Repositories_repository on RepositoryConnection
-//   @argumentDefinitions(
-//     first: { type: "Int", defaultValue: 10 }
-//     after: { type: "String" }
-//   )
-//   @refetchable(
-//     queryName: "RepositoriesPaginationQuery"
-//   ) {
-//     repositories(first: $first, after: $after)
-//       @connection(key: "Repositories_repository") {
-//       edges {
-//         node {
-//         ...onerepo_repository
-//         }
-//       }
-//       pageInfo {
-//         endCursor
-//         hasNextPage
-//         hasPreviousPage
-//         startCursor
-//       }
-//       totalCount
-//     }
-//   }
-// `;
+export const RepositoriesFragment = graphql`
+  fragment Repositories_repositories on User
+  @argumentDefinitions(
+    first: { type: "Int", defaultValue: 10 }
+    after: { type: "String" }
+  )
+  @refetchable(
+    queryName: "RepositoriesPaginationQuery"
+  ) {
+    repositories(first: $first, after: $after)
+      @connection(key: "Repositories_repositories") {
+      edges {
+        node {
+        id
+        }
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+        startCursor
+      }
+      totalCount
+    }
+  }
+`;

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<a047724b892daa69186e3e2127e75840>>
+ * @generated SignedSource<<f49c67c62534f6992ccb3ba8563f40e9>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,11 +9,41 @@
 // @ts-nocheck
 
 import { ConcreteRequest, Query } from 'relay-runtime';
-import { FragmentRefs } from "relay-runtime";
 export type routesROOTVIEWERQuery$variables = {};
 export type routesROOTVIEWERQuery$data = {
   readonly viewer: {
-    readonly " $fragmentSpreads": FragmentRefs<"ProfileInfo_user">;
+    readonly avatarUrl: any;
+    readonly bio: string | null;
+    readonly company: string | null;
+    readonly createdAt: any;
+    readonly email: string;
+    readonly followers: {
+      readonly nodes: ReadonlyArray<{
+        readonly id: string;
+      } | null> | null;
+      readonly totalCount: number;
+    };
+    readonly following: {
+      readonly nodes: ReadonlyArray<{
+        readonly id: string;
+      } | null> | null;
+      readonly totalCount: number;
+    };
+    readonly id: string;
+    readonly isFollowingViewer: boolean;
+    readonly isViewer: boolean;
+    readonly location: string | null;
+    readonly login: string;
+    readonly name: string | null;
+    readonly repositories: {
+      readonly nodes: ReadonlyArray<{
+        readonly id: string;
+      } | null> | null;
+      readonly totalCount: number;
+    };
+    readonly twitterUsername: string | null;
+    readonly url: any;
+    readonly viewerIsFollowing: boolean;
   };
 };
 export type routesROOTVIEWERQuery = {
@@ -58,6 +88,153 @@ v4 = [
     "selections": (v3/*: any*/),
     "storageKey": null
   }
+],
+v5 = [
+  {
+    "alias": null,
+    "args": null,
+    "concreteType": "User",
+    "kind": "LinkedField",
+    "name": "viewer",
+    "plural": false,
+    "selections": [
+      (v0/*: any*/),
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "name",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "login",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "email",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "bio",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "avatarUrl",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "company",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "twitterUsername",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "createdAt",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "isFollowingViewer",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "viewerIsFollowing",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "isViewer",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "location",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "url",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": (v1/*: any*/),
+        "concreteType": "FollowerConnection",
+        "kind": "LinkedField",
+        "name": "followers",
+        "plural": false,
+        "selections": (v4/*: any*/),
+        "storageKey": "followers(first:1)"
+      },
+      {
+        "alias": null,
+        "args": (v1/*: any*/),
+        "concreteType": "FollowingConnection",
+        "kind": "LinkedField",
+        "name": "following",
+        "plural": false,
+        "selections": (v4/*: any*/),
+        "storageKey": "following(first:1)"
+      },
+      {
+        "alias": null,
+        "args": (v1/*: any*/),
+        "concreteType": "RepositoryConnection",
+        "kind": "LinkedField",
+        "name": "repositories",
+        "plural": false,
+        "selections": [
+          (v2/*: any*/),
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "Repository",
+            "kind": "LinkedField",
+            "name": "nodes",
+            "plural": true,
+            "selections": (v3/*: any*/),
+            "storageKey": null
+          }
+        ],
+        "storageKey": "repositories(first:1)"
+      }
+    ],
+    "storageKey": null
+  }
 ];
 return {
   "fragment": {
@@ -65,24 +242,7 @@ return {
     "kind": "Fragment",
     "metadata": null,
     "name": "routesROOTVIEWERQuery",
-    "selections": [
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "User",
-        "kind": "LinkedField",
-        "name": "viewer",
-        "plural": false,
-        "selections": [
-          {
-            "args": null,
-            "kind": "FragmentSpread",
-            "name": "ProfileInfo_user"
-          }
-        ],
-        "storageKey": null
-      }
-    ],
+    "selections": (v5/*: any*/),
     "type": "Query",
     "abstractKey": null
   },
@@ -91,165 +251,19 @@ return {
     "argumentDefinitions": [],
     "kind": "Operation",
     "name": "routesROOTVIEWERQuery",
-    "selections": [
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "User",
-        "kind": "LinkedField",
-        "name": "viewer",
-        "plural": false,
-        "selections": [
-          (v0/*: any*/),
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "name",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "login",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "email",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "bio",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "avatarUrl",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "company",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "twitterUsername",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "createdAt",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "isFollowingViewer",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "viewerIsFollowing",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "isViewer",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "location",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "url",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": (v1/*: any*/),
-            "concreteType": "FollowerConnection",
-            "kind": "LinkedField",
-            "name": "followers",
-            "plural": false,
-            "selections": (v4/*: any*/),
-            "storageKey": "followers(first:1)"
-          },
-          {
-            "alias": null,
-            "args": (v1/*: any*/),
-            "concreteType": "FollowingConnection",
-            "kind": "LinkedField",
-            "name": "following",
-            "plural": false,
-            "selections": (v4/*: any*/),
-            "storageKey": "following(first:1)"
-          },
-          {
-            "alias": null,
-            "args": (v1/*: any*/),
-            "concreteType": "RepositoryConnection",
-            "kind": "LinkedField",
-            "name": "repositories",
-            "plural": false,
-            "selections": [
-              (v2/*: any*/),
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "Repository",
-                "kind": "LinkedField",
-                "name": "nodes",
-                "plural": true,
-                "selections": (v3/*: any*/),
-                "storageKey": null
-              }
-            ],
-            "storageKey": "repositories(first:1)"
-          }
-        ],
-        "storageKey": null
-      }
-    ]
+    "selections": (v5/*: any*/)
   },
   "params": {
-    "cacheID": "9f5c3f1ecabc8e24c177881685bffea1",
+    "cacheID": "4024df5768f5b87041503c55568676cd",
     "id": null,
     "metadata": {},
     "name": "routesROOTVIEWERQuery",
     "operationKind": "query",
-    "text": "query routesROOTVIEWERQuery {\n  viewer {\n    ...ProfileInfo_user\n    id\n  }\n}\n\nfragment ProfileInfo_user on User {\n  id\n  name\n  login\n  email\n  bio\n  avatarUrl\n  company\n  twitterUsername\n  createdAt\n  isFollowingViewer\n  viewerIsFollowing\n  isViewer\n  location\n  url\n  followers(first: 1) {\n    totalCount\n    nodes {\n      id\n    }\n  }\n  following(first: 1) {\n    totalCount\n    nodes {\n      id\n    }\n  }\n  repositories(first: 1) {\n    totalCount\n    nodes {\n      id\n    }\n  }\n}\n"
+    "text": "query routesROOTVIEWERQuery {\n  viewer {\n    id\n    name\n    login\n    email\n    bio\n    avatarUrl\n    company\n    twitterUsername\n    createdAt\n    isFollowingViewer\n    viewerIsFollowing\n    isViewer\n    location\n    url\n    followers(first: 1) {\n      totalCount\n      nodes {\n        id\n      }\n    }\n    following(first: 1) {\n      totalCount\n      nodes {\n        id\n      }\n    }\n    repositories(first: 1) {\n      totalCount\n      nodes {\n        id\n      }\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "763979d3b2fb69f5058658cba3d14f00";
+(node as any).hash = "ade2188d6751a3abfbe7e22c4155347c";
 
 export default node;

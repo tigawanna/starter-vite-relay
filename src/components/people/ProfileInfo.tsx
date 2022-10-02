@@ -7,15 +7,23 @@ import { MdCorporateFare } from "react-icons/md";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { TheIcon } from "../Shared/TheIcon";
 import { graphql } from "relay-runtime";
+import { AppROOTVIEWERQuery$data } from "../../__generated__/AppROOTVIEWERQuery.graphql";
+import { useFragment } from "react-relay";
+import { ProfileInfo_user$data } from "./__generated__/ProfileInfo_user.graphql";
 dayjs.extend(relativeTime);
 
 interface ProfileInfoProps {
+  viewer: AppROOTVIEWERQuery$data
 }
 
-export const ProfileInfo: React.FC<ProfileInfoProps> = ({  }) => {
+export const ProfileInfo: React.FC<ProfileInfoProps> = ({ viewer }) => {
   // console.log("profile info props ===   ==== ",user,token)
+const data = useFragment(ProfileInfoVIEWERfragmant, viewer.viewer);
+console.log("data in profile fromfragment === ", data)
 
- const user:any= {}
+
+ const user= data as ProfileInfo_user$data
+
   const extradetails = {
     company: user?.company,
     email: user?.email,
@@ -126,7 +134,7 @@ export const ProfileInfo: React.FC<ProfileInfoProps> = ({  }) => {
 };
 
 interface ProfileInfoItemWrapperProps {
-  value?: string;
+  value: string|null;
   valkey: string;
 }
 
@@ -166,3 +174,23 @@ export const ProfileInfoItemWrapper: React.FC<ProfileInfoItemWrapperProps> = ({
 
 
 
+export const ProfileInfoVIEWERfragmant = graphql`
+# github graphql query to get more details
+  fragment ProfileInfo_user on User{
+    id
+    name
+    login
+    email
+    bio
+    avatarUrl
+    company
+    twitterUsername
+    createdAt
+    isFollowingViewer
+    viewerIsFollowing
+    isViewer
+    location
+    url
+   
+  }
+`;

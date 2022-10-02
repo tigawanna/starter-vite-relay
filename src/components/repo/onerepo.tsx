@@ -1,9 +1,6 @@
 import React from 'react'
-import { PreloadedQuery } from 'react-relay';
-import { HomeFullRepoQuery } from '../home/__generated__/HomeFullRepoQuery.graphql';
-import { usePreloadedQuery, graphql, useLazyLoadQuery } from 'react-relay/hooks';
+import { graphql, useLazyLoadQuery } from 'react-relay/hooks';
 import { onerepoFullRepoQuery } from './__generated__/onerepoFullRepoQuery.graphql';
-import { Stars } from './Stars';
 import { Branches } from './Branches';
 
 
@@ -40,20 +37,35 @@ return (
 }
 
 
-export const FULLREPO = graphql`
 
-  query onerepoFullRepoQuery(
-    $repoowner: String!,
-    $reponame: String!,
-    ) {
-    repository(owner: $repoowner, name: $reponame) {
-    nameWithOwner,
-    forkCount,
-    ...Stars_stargazers
-    ...Branches_refs
-    # stargazers(after:$after,first:$first)  @connection(key: "Stars_stargazers"){
-    #   ...Stars_stars
-    # }
-   }
-  }
-`;
+// export const RepositoryFragment = graphql`
+//   fragment onerepo_repository on User
+//   @argumentDefinitions(
+//     first: { type: "Int", defaultValue: 10 }
+//     after: { type: "String" }
+//   )
+//   @refetchable(
+//     queryName: "RepositoryPaginationQuery"
+//   ) {
+//     repository(first: $first, after: $after , orderBy: { field: PUSHED_AT, direction: DESC })
+//        @connection(key: "onerepo_repository") {
+//       edges {
+//         node {
+//          nameWithOwner,
+//          forkCount,
+//          ...Stars_stargazers,
+//          ...Branches_refs
+//         }
+//       }
+//       pageInfo {
+//         endCursor
+//         hasNextPage
+//         hasPreviousPage
+//         startCursor
+//       }
+//       totalCount
+//     }
+//   }
+// `;
+
+

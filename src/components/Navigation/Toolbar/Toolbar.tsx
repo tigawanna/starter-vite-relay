@@ -18,10 +18,10 @@ import { TheIcon } from './../../Shared/TheIcon';
 import { useTheme } from './../../../utils/useTheme';
 
 interface ToolbarProps {
-
+avatarUrl:string
 }
 
-export const Toolbar: React.FC<ToolbarProps> = () => {
+export const Toolbar: React.FC<ToolbarProps> = ({avatarUrl}) => {
 const [open, setOpen] = React.useState(false)
 const localdata = useLocalStoreValues(); 
 const logout = () => { localdata.updateToken(null)}
@@ -29,8 +29,8 @@ const theme = useTheme()
   const nextTheme = theme.theme=== 'dark' ? 'light' : 'dark'
   const mode = theme.theme === "dark" ? BsSunFill : BsFillMoonFill;
   const toggle = () => { theme.setTheme(nextTheme) }
-
-
+  const stuff = useMatch()
+  console.log("stuff.data.viewer in toolbar",stuff)
 return (
   <div className="w-[100%] bg-slate-300 border-b dark:text-white  dark:bg-black h-[60px] max-h-[50px] 
   flex-center transition ease-linear delay-100">
@@ -55,10 +55,20 @@ return (
          test
         </Link>
 
-       {/* sign out modal */}
-        <div className="h-[40px] w-10 hover:bg-slate-700 m-1"> 
-          <TheIcon Icon={BsMenuDown} size={"25"} color={""} iconAction={() => setOpen(true)} />
+        <div
+          onClick={() => setOpen(true)}
+          className="h-[40px] w-10 hover:bg-slate-700 m-1"
+        >
+          <img
+            className="h-[80%] w-fit rounded-[50%] m-1 border border-white"
+            src={(avatarUrl)}
+            alt=""
+            height={"20px"}
+            width={"20px"}
+           />
         </div>
+
+
       </div>
 
 

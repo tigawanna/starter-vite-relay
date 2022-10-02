@@ -1,5 +1,5 @@
 <script src="https://cdn.tailwindcss.com"></script>
-# Starter files for vite with react and tailwindcss
+# Starter files for vite with react and tailwindcss , react realy for graphql , react-location for routing and zustand for state mangement  
 
 ### *clone the repo and do `npm install` and do `npm update` if necesary*
 
@@ -31,6 +31,23 @@ tailwind is configured with a few custom classes
 
 ```
 
+[root element](src\main.tsx)<br>
+[main container fro all the routes and toolbar](src\App.tsx)<br>
+[custome theme hook](src\utils\useTheme.ts)<br>
+[relay config files](src\relay)<br>
+[zustand stores](src\store.ts)<br>
+[react location routes](src\routes.tsx)<br>
+[codgen config file](codegen.yml)
+> codegen is not necessary if using relay because realy-compiler generates it's own types
+
+
+dont forget to add a .env file with your github personal access token like so
+
+```ts
+VITE_TOKEN = ghp_TkkntokrntttkeeenKmSFXfQtoktntoktntotk
+```
+
+you can explore other branches of this repo for more complete projects 
 
 # **relay**
 
@@ -296,6 +313,8 @@ and field suggstion.
 
 this package and the compiler rely on babel , i sued vite react fro this projectandit doesn't use babel as the build tool but there's [a plugin that helaps with that](https://www.npmjs.com/package/vite-plugin-relay)
 
-Also just in case you're building something fromthe ground up consider a [different router](https://stackoverflow.com/questions/68358785/how-do-i-use-react-router-with-relay)
-
+### routing
+react-router doesn't suppost preloading queries . it'll still work by avoiding the `usePreloadedQueries` 
+but in case you're building something from the ground up r refactoring consider a [different router](https://stackoverflow.com/questions/68358785/how-do-i-use-react-router-with-relay)<br>
+or even better [react-location from the makers of react-query](https://react-location.tanstack.com/) i would recommend this over `found` because of the ease of use and better updated docs and examples , switched to it after having a hard time with `found`
 <h3 class="bg-slate-400">--- The End ---</h3>

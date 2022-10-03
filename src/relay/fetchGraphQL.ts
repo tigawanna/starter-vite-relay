@@ -4,6 +4,9 @@ import { useLocalStoreValues } from "./../store";
 
 async function fetchGraphQL(text:any, variables:any) {
 
+
+
+  try{
  const localdata = useLocalStoreValues.getState(); 
 
 // Fetch data from GitHub's GraphQL API:
@@ -32,6 +35,10 @@ async function fetchGraphQL(text:any, variables:any) {
 
   // Get the response as JSON
   return res;
+  }
+  catch(e){
+  console.log("error fetching ",e)
+  }
   
 }
 

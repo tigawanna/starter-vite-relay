@@ -7,9 +7,9 @@ interface LoadingShimmerProps {
 
 export const LoadingShimmer: React.FC<LoadingShimmerProps> = ({}) => {
 return (
- <div className='w-full h-screen'>
-        <div className='w-full h-full placeholder:animate-pulse p-20 bg-slate-200'>
-              <Loading size={50}/>
+ <div className='w-full h-screen flex-center'>
+        <div className='w-full h-full animate-pulse p-2 bg-slate-200 flex-center'>
+              <Loading size={150}/>
         </div>
 
  </div>

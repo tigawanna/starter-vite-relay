@@ -1,12 +1,16 @@
-import { useMatch } from '@tanstack/react-location';
 import React from 'react'
 import { useState } from 'react';
 import { TabItem } from '../Shared/TabItem';
 import { ProfileInfo } from '../people/ProfileInfo';
 import { graphql } from 'relay-runtime';
 import { AppROOTVIEWERQuery$data } from '../../__generated__/AppROOTVIEWERQuery.graphql';
-import { useFragment } from 'react-relay';
+import { useFragment, useLazyLoadQuery } from 'react-relay';
 import { Home_user$data } from './__generated__/Home_user.graphql';
+import { Followers } from '../people/Followers';
+import { Following } from '../people/Following';
+import { App_user$data } from '../../__generated__/App_user.graphql';
+import { Repositories } from '../repo/Repositories';
+import { HomeVIEWERQuery } from './__generated__/HomeVIEWERQuery.graphql';
 
 
 
@@ -14,13 +18,16 @@ import { Home_user$data } from './__generated__/Home_user.graphql';
 
 interface HomeProps {
   viewerData: AppROOTVIEWERQuery$data
+  viewer_info: App_user$data
 }
 
-export const Home: React.FC<HomeProps> = ({viewerData}) => {
+export const Home: React.FC<HomeProps> = ({viewerData,viewer_info}) => {
 
 const [currTab, setCurrTab] = useState<string>("repo")
 const data = useFragment(HomeVIEWERfragmant, viewerData.viewer);
+const tabsData = useLazyLoadQuery<HomeVIEWERQuery>(HomeViewerQuery, {});
 
+//  console.log("response viewer info == ",viewer_info)
 
 const response = data as Home_user$data
  const tabs = [
@@ -37,7 +44,7 @@ return (
 
         <div className="min-h-[80%] flex flex-col justify-start">
         <div className="w-full flex items-center justify-evenly 
-        flex-wrap sticky z-20 top-[10%] dark:bg-slate-700 bg-white">
+        flex-wrap sticky z-20 top-[100px] dark:bg-slate-700 bg-white">
                 {tabs.map((item, index) => {
                     return (
                         <TabItem
@@ -51,22 +58,27 @@ return (
                 })}
             </div>
 
-            {/* {currTab === "repo" ? (
-                <Repository
-                    username={response?.login as string}
+            {currTab === "repo" ? (
+                <Repositories
+                    user={viewer_info}
+                    viewerData={tabsData}
                 />
             ) : null}
 
-            {currTab === "followers" ? (
+             {currTab === "followers" ? (
                 <Followers
-                  user={response}
+                    viewerData={tabsData}
                 />
-            ) : null}
+            ) : null} 
+
             {currTab === "following" ? (
                 <Following
-                   user={response}
+                   viewerData={tabsData}
+       
                 />
-            ) : null} */}
+            ) : null}  
+
+
         </div>
     </div>
 );
@@ -77,16 +89,17 @@ return (
 
 
 
-// export const ROOTVIEWER = graphql`
-// # github graphql query to get more details
-//   query HomeROOTVIEWERQuery{
-//    viewer{
-// ...Following_following
-// ...Followers_followers
-// ...Repositories_repositories
-// }
-// }
-// `;
+export const HomeViewerQuery = graphql`
+# github graphql query to get more details
+  query HomeVIEWERQuery{
+viewer{
+ ...Repositories_repositories
+ ...Following_following
+ ...Followers_followers
+
+}
+}
+`;
 
 
 export const HomeVIEWERfragmant = graphql`

@@ -1,58 +1,56 @@
 import React from "react";
-import { PersonCard } from "./personCard";
-import { FOLLOWERS } from "./utils/queries";
-import { FOLLOWERSPAGE, ROOTFOLLOWERS } from "./utils/types";
-import { Loading } from './../Shared/Loading';
 import { graphql } from "relay-runtime";
+import { HomeVIEWERQuery$data } from "../home/__generated__/HomeVIEWERQuery.graphql";
+import { usePaginationFragment } from "react-relay";
+import { Loading } from "../Shared/Loading";
+import { FollowersPaginationQuery } from "./__generated__/FollowersPaginationQuery.graphql";
+import { Followers_followers$data } from "./__generated__/Followers_followers.graphql";
+import { PersonCard } from './PersonCard';
 
 
 interface FollowersProps {
- user:OneUser|undefined
+  viewerData: HomeVIEWERQuery$data;
 }
 
-export const Followers: React.FC<FollowersProps> = ({user}) => {
-const data = query.data as ROOTFOLLOWERS;
+export const Followers: React.FC<FollowersProps> = ({ viewerData }) => {
 
 
-    const pages = data?.pages;
-    //  console.log("followers === ",data)
-    const extras = pages[pages.length - 1].user?.followers;
-    const hasMore = extras?.pageInfo?.hasNextPage;
+  const followers_data = usePaginationFragment<FollowersPaginationQuery, any>(FollowersFragment, viewerData.viewer);
+  const followers = followers_data.data as Followers_followers$data
 
   return (
-    <div className="min-h-screen w-full flex-col justify-start mb-5">
+    <div className="min-h-screen w-full flex flex-col justify-start h-full mb-5 ">
       <div className="h-fit w-full flex-center  flex-wrap">
-        {pages?.map((page) => {
-          return page?.user?.followers?.edges?.map((item,index) => {
-            return (
-              <PersonCard
-                key={item.node.id + index}
-                dev={item?.node}
-             
-               />
-            );
-          });
+        {followers?.followers?.edges?.map((follow, index) => {
+          console.log("follow node === ", follow)
+          return (
+            <PersonCard
+              key={index}
+              personRef={follow?.node}
+            />
+          );
+
         })}
       </div>
-      {/* {!query.isFetchingNextPage && hasMore ? (
+      {followers_data.hasNext ? (
         <button
           className="m-2 hover:text-purple-400 shadow-lg hover:shadow-purple"
           onClick={() => {
-            query.fetchNextPage();
+            followers_data.loadNext(10)
           }}
         >
           --- load more ---
         </button>
       ) : null}
-      {query.isFetchingNextPage ? (
-      <div className="w-full flex-center ">
-        <Loading size={20} />
-      </div>
-      ) : null} */}
+
+      {followers_data.isLoadingNext ? (
+        <div className="w-full flex-center">
+          <Loading size={20} />
+        </div>
+      ) : null}
     </div>
   );
 };
-
 
 export const FollowersFragment = graphql`
   fragment Followers_followers on User
@@ -66,8 +64,8 @@ export const FollowersFragment = graphql`
     followers(first: $first, after: $after)
        @connection(key: "Followers_followers") {
       edges {
-        node {
-         id
+      node {
+        ...PersonCard_user
         }
       }
       pageInfo {
@@ -80,3 +78,6 @@ export const FollowersFragment = graphql`
     }
   }
 `;
+
+
+

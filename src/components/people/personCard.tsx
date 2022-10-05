@@ -1,17 +1,20 @@
 import { useState } from "react";
+import { useFragment } from "react-relay";
+import { graphql } from "relay-runtime";
 import { OneUser } from "./utils/types";
+import { PersonCard_user$data } from "./__generated__/PersonCard_user.graphql";
 
 
 
 interface PersonCardProps {
-  dev: OneUser;
+personRef:any
 }
 
-export const PersonCard: React.FC<PersonCardProps> = ({ dev}) => {
-
-// console.log("mini user gql query ", miniuser);
+export const PersonCard: React.FC<PersonCardProps> = ({ personRef}) => {
+const data = useFragment(PersonCardFragment, personRef);
+const dev = data as PersonCard_user$data
+// console.log("mini user gql query ", data);
 const [yes, setYes] = useState<any>(dev?.viewerIsFollowing);
-
 const followThem = (their_id: string) => {
     setYes(true);
     // followUser(their_name, token);
@@ -85,3 +88,23 @@ const followThem = (their_id: string) => {
     </div>
   );
 };
+
+
+export const PersonCardFragment = graphql`
+  fragment PersonCard_user on User {
+    id
+    name
+    login
+    email
+    bio
+    avatarUrl
+    company
+    twitterUsername
+    createdAt
+    isFollowingViewer
+    viewerIsFollowing
+    isViewer
+    location
+    url
+    }
+`;

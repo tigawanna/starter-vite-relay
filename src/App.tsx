@@ -25,9 +25,9 @@ const location = new ReactLocation({ history })
 const App: React.FC<AppProps> = ({ rootQueryRef }) => {
 
 const viewerData = usePreloadedQuery<AppROOTVIEWERQuery>(ROOTVIEWER, rootQueryRef);
-console.log("viewer data ", viewerData)
+// console.log("viewer data ", viewerData)
 const data = useFragment(AppVIEWERfragmant, viewerData.viewer);
-console.log("query data App frag ",data)
+// console.log("query data App frag ",data)
 const response = data as App_user$data
 
 
@@ -38,7 +38,7 @@ return (
      <ErrorBoundary>
      <Router location={location} 
       routes={[
-        { path: "/", element: <Home viewerData={viewerData}/> },
+        { path: "/", element: <Home viewerData={viewerData} viewer_info={response}/> },
         { path: "test", element: <Test /> },
       ]}
      >
@@ -63,7 +63,12 @@ export default App
 export const AppVIEWERfragmant = graphql`
 # github graphql query to get more details
   fragment App_user on User{
-    avatarUrl
+      id
+      name
+      login
+      email
+      bio
+      avatarUrl
     }
 `;
 

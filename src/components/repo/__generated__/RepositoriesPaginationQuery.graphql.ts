@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<af135b34285d7c6385d464820c79182e>>
+ * @generated SignedSource<<2c17cf86c1b6f941bbb238c45fea597d>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -50,30 +50,47 @@ v1 = [
     "variableName": "id"
   }
 ],
-v2 = [
-  {
-    "kind": "Variable",
-    "name": "after",
-    "variableName": "after"
-  },
-  {
-    "kind": "Variable",
-    "name": "first",
-    "variableName": "first"
-  }
-],
+v2 = {
+  "kind": "Variable",
+  "name": "after",
+  "variableName": "after"
+},
 v3 = {
+  "kind": "Variable",
+  "name": "first",
+  "variableName": "first"
+},
+v4 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "__typename",
   "storageKey": null
 },
-v4 = {
+v5 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "id",
+  "storageKey": null
+},
+v6 = [
+  (v2/*: any*/),
+  (v3/*: any*/),
+  {
+    "kind": "Literal",
+    "name": "orderBy",
+    "value": {
+      "direction": "DESC",
+      "field": "PUSHED_AT"
+    }
+  }
+],
+v7 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "name",
   "storageKey": null
 };
 return {
@@ -92,7 +109,10 @@ return {
         "plural": false,
         "selections": [
           {
-            "args": (v2/*: any*/),
+            "args": [
+              (v2/*: any*/),
+              (v3/*: any*/)
+            ],
             "kind": "FragmentSpread",
             "name": "Repositories_repositories"
           }
@@ -117,14 +137,14 @@ return {
         "name": "node",
         "plural": false,
         "selections": [
-          (v3/*: any*/),
           (v4/*: any*/),
+          (v5/*: any*/),
           {
             "kind": "InlineFragment",
             "selections": [
               {
                 "alias": null,
-                "args": (v2/*: any*/),
+                "args": (v6/*: any*/),
                 "concreteType": "RepositoryConnection",
                 "kind": "LinkedField",
                 "name": "repositories",
@@ -146,8 +166,235 @@ return {
                         "name": "node",
                         "plural": false,
                         "selections": [
-                          (v4/*: any*/),
-                          (v3/*: any*/)
+                          (v5/*: any*/),
+                          (v7/*: any*/),
+                          {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "description",
+                            "storageKey": null
+                          },
+                          {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "pushedAt",
+                            "storageKey": null
+                          },
+                          {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "diskUsage",
+                            "storageKey": null
+                          },
+                          {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "url",
+                            "storageKey": null
+                          },
+                          {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "visibility",
+                            "storageKey": null
+                          },
+                          {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "forkCount",
+                            "storageKey": null
+                          },
+                          {
+                            "alias": null,
+                            "args": [
+                              (v3/*: any*/)
+                            ],
+                            "concreteType": "LanguageConnection",
+                            "kind": "LinkedField",
+                            "name": "languages",
+                            "plural": false,
+                            "selections": [
+                              {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "LanguageEdge",
+                                "kind": "LinkedField",
+                                "name": "edges",
+                                "plural": true,
+                                "selections": [
+                                  {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "Language",
+                                    "kind": "LinkedField",
+                                    "name": "node",
+                                    "plural": false,
+                                    "selections": [
+                                      (v5/*: any*/),
+                                      {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "color",
+                                        "storageKey": null
+                                      },
+                                      (v7/*: any*/)
+                                    ],
+                                    "storageKey": null
+                                  }
+                                ],
+                                "storageKey": null
+                              }
+                            ],
+                            "storageKey": null
+                          },
+                          {
+                            "alias": null,
+                            "args": [
+                              {
+                                "kind": "Literal",
+                                "name": "first",
+                                "value": 2
+                              },
+                              {
+                                "kind": "Literal",
+                                "name": "orderBy",
+                                "value": {
+                                  "direction": "DESC",
+                                  "field": "TAG_COMMIT_DATE"
+                                }
+                              },
+                              {
+                                "kind": "Literal",
+                                "name": "refPrefix",
+                                "value": "refs/heads/"
+                              }
+                            ],
+                            "concreteType": "RefConnection",
+                            "kind": "LinkedField",
+                            "name": "refs",
+                            "plural": false,
+                            "selections": [
+                              {
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "RefEdge",
+                                "kind": "LinkedField",
+                                "name": "edges",
+                                "plural": true,
+                                "selections": [
+                                  {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "Ref",
+                                    "kind": "LinkedField",
+                                    "name": "node",
+                                    "plural": false,
+                                    "selections": [
+                                      (v7/*: any*/),
+                                      (v5/*: any*/),
+                                      {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": null,
+                                        "kind": "LinkedField",
+                                        "name": "target",
+                                        "plural": false,
+                                        "selections": [
+                                          (v4/*: any*/),
+                                          {
+                                            "kind": "InlineFragment",
+                                            "selections": [
+                                              {
+                                                "alias": null,
+                                                "args": [
+                                                  {
+                                                    "kind": "Literal",
+                                                    "name": "first",
+                                                    "value": 1
+                                                  }
+                                                ],
+                                                "concreteType": "CommitHistoryConnection",
+                                                "kind": "LinkedField",
+                                                "name": "history",
+                                                "plural": false,
+                                                "selections": [
+                                                  {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "concreteType": "CommitEdge",
+                                                    "kind": "LinkedField",
+                                                    "name": "edges",
+                                                    "plural": true,
+                                                    "selections": [
+                                                      {
+                                                        "alias": null,
+                                                        "args": null,
+                                                        "concreteType": "Commit",
+                                                        "kind": "LinkedField",
+                                                        "name": "node",
+                                                        "plural": false,
+                                                        "selections": [
+                                                          {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "kind": "ScalarField",
+                                                            "name": "committedDate",
+                                                            "storageKey": null
+                                                          },
+                                                          {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "concreteType": "GitActor",
+                                                            "kind": "LinkedField",
+                                                            "name": "author",
+                                                            "plural": false,
+                                                            "selections": [
+                                                              (v7/*: any*/)
+                                                            ],
+                                                            "storageKey": null
+                                                          },
+                                                          {
+                                                            "alias": null,
+                                                            "args": null,
+                                                            "kind": "ScalarField",
+                                                            "name": "message",
+                                                            "storageKey": null
+                                                          },
+                                                          (v5/*: any*/)
+                                                        ],
+                                                        "storageKey": null
+                                                      }
+                                                    ],
+                                                    "storageKey": null
+                                                  }
+                                                ],
+                                                "storageKey": "history(first:1)"
+                                              }
+                                            ],
+                                            "type": "Commit",
+                                            "abstractKey": null
+                                          },
+                                          (v5/*: any*/)
+                                        ],
+                                        "storageKey": null
+                                      }
+                                    ],
+                                    "storageKey": null
+                                  }
+                                ],
+                                "storageKey": null
+                              }
+                            ],
+                            "storageKey": "refs(first:2,orderBy:{\"direction\":\"DESC\",\"field\":\"TAG_COMMIT_DATE\"},refPrefix:\"refs/heads/\")"
+                          },
+                          (v4/*: any*/)
                         ],
                         "storageKey": null
                       },
@@ -212,8 +459,10 @@ return {
               },
               {
                 "alias": null,
-                "args": (v2/*: any*/),
-                "filters": null,
+                "args": (v6/*: any*/),
+                "filters": [
+                  "orderBy"
+                ],
                 "handle": "connection",
                 "key": "Repositories_repositories",
                 "kind": "LinkedHandle",
@@ -229,16 +478,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "9e82fb8d246fee4cfa88bf0d2daeb43e",
+    "cacheID": "b3b7576287b3465a87d6971058acc097",
     "id": null,
     "metadata": {},
     "name": "RepositoriesPaginationQuery",
     "operationKind": "query",
-    "text": "query RepositoriesPaginationQuery(\n  $after: String\n  $first: Int = 10\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...Repositories_repositories_2HEEH6\n    id\n  }\n}\n\nfragment Repositories_repositories_2HEEH6 on User {\n  repositories(first: $first, after: $after) {\n    edges {\n      node {\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n    totalCount\n  }\n  id\n}\n"
+    "text": "query RepositoriesPaginationQuery(\n  $after: String\n  $first: Int = 10\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...Repositories_repositories_2HEEH6\n    id\n  }\n}\n\nfragment Repositories_repositories_2HEEH6 on User {\n  repositories(first: $first, after: $after, orderBy: {field: PUSHED_AT, direction: DESC}) {\n    edges {\n      node {\n        id\n        name\n        description\n        pushedAt\n        diskUsage\n        url\n        visibility\n        forkCount\n        languages(first: $first) {\n          edges {\n            node {\n              id\n              color\n              name\n            }\n          }\n        }\n        refs(refPrefix: \"refs/heads/\", orderBy: {direction: DESC, field: TAG_COMMIT_DATE}, first: 2) {\n          edges {\n            node {\n              name\n              id\n              target {\n                __typename\n                ... on Commit {\n                  history(first: 1) {\n                    edges {\n                      node {\n                        committedDate\n                        author {\n                          name\n                        }\n                        message\n                        id\n                      }\n                    }\n                  }\n                }\n                id\n              }\n            }\n          }\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n    totalCount\n  }\n  id\n}\n"
   }
 };
 })();
 
-(node as any).hash = "7a42e11ea3a59a27fbd69e694ef44d30";
+(node as any).hash = "98d59085c1b71ce7465ccf4fa9375011";
 
 export default node;

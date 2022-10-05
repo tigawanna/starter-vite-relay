@@ -34,7 +34,9 @@ return (
   <div className="w-[100%] bg-slate-300 border-b dark:text-white  dark:bg-black h-[60px] max-h-[50px] 
   flex-center transition ease-linear delay-100">
     {open ? (
+      <div className='z-50'>
       <Consent setOpen={setOpen} message={"Sign Out?"} action={logout} />
+      </div>
     ) : null}
     <div className="flex items-center justify-between w-full text-lg font-bold ">
       {/* home link */}

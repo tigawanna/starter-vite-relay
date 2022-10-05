@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<3d9db38aeab0ce7505c64404fc688712>>
+ * @generated SignedSource<<6ad5697f813b906749af39cd63055750>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -14,7 +14,7 @@ export type Following_following$data = {
   readonly following: {
     readonly edges: ReadonlyArray<{
       readonly node: {
-        readonly id: string;
+        readonly " $fragmentSpreads": FragmentRefs<"PersonCard_user">;
       } | null;
     } | null> | null;
     readonly pageInfo: {
@@ -38,14 +38,7 @@ import FollowingPaginationQuery_graphql from './FollowingPaginationQuery.graphql
 const node: ReaderFragment = (function(){
 var v0 = [
   "following"
-],
-v1 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "id",
-  "storageKey": null
-};
+];
 return {
   "argumentDefinitions": [
     {
@@ -111,7 +104,11 @@ return {
               "name": "node",
               "plural": false,
               "selections": [
-                (v1/*: any*/),
+                {
+                  "args": null,
+                  "kind": "FragmentSpread",
+                  "name": "PersonCard_user"
+                },
                 {
                   "alias": null,
                   "args": null,
@@ -181,13 +178,19 @@ return {
       ],
       "storageKey": null
     },
-    (v1/*: any*/)
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "id",
+      "storageKey": null
+    }
   ],
   "type": "User",
   "abstractKey": null
 };
 })();
 
-(node as any).hash = "b59afb14b07555f8ccc2188bcbd1dce8";
+(node as any).hash = "1fd36b49988bac72586f704d111a6ead";
 
 export default node;

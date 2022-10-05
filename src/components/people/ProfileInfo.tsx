@@ -19,7 +19,7 @@ interface ProfileInfoProps {
 export const ProfileInfo: React.FC<ProfileInfoProps> = ({ viewer }) => {
   // console.log("profile info props ===   ==== ",user,token)
 const data = useFragment(ProfileInfoVIEWERfragmant, viewer.viewer);
-console.log("data in profile fromfragment === ", data)
+// console.log("data in profile fromfragment === ", data)
 
 
  const user= data as ProfileInfo_user$data

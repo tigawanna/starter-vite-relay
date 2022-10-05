@@ -20,7 +20,7 @@ export const Home: React.FC<HomeProps> = ({viewerData}) => {
 
 const [currTab, setCurrTab] = useState<string>("repo")
 const data = useFragment(HomeVIEWERfragmant, viewerData.viewer);
-console.log("data in home from fragment === ", data)
+
 
 const response = data as Home_user$data
  const tabs = [
@@ -37,7 +37,7 @@ return (
 
         <div className="min-h-[80%] flex flex-col justify-start">
         <div className="w-full flex items-center justify-evenly 
-        flex-wrap sticky z-50 top-[10%] dark:bg-slate-700 bg-white">
+        flex-wrap sticky z-20 top-[10%] dark:bg-slate-700 bg-white">
                 {tabs.map((item, index) => {
                     return (
                         <TabItem

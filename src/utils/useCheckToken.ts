@@ -35,6 +35,7 @@ export const GETVIEWER = gql`
 export const useCheckToken=()=>{
 const { localValues, updateMainUser,updateToken } = useLocalStoreValues()
 const [viewer,setViewer] = useState(null)
+const [loading, setLoading] = useState(true);
 const [error, setError] = useState<GqlErr|null>(null);
 const token = localValues.token
     const endpoint = "https://api.github.com/graphql";
@@ -55,20 +56,24 @@ const token = localValues.token
     );
     updateMainUser({ user: res, error: null });
     setError(null)
+    setLoading(false)
     if(res.error){
     setError(res.error);
+    setLoading(false);
     }
     else{
     setViewer(res);
+    setLoading(false);
     }
  } catch (e:any) {
      updateMainUser({user: null,error: e.response,});
      setError(e.response);
+      setLoading(false);
   }
 }
 
 fetchdata();
  },[token])
-return {viewer,error}
+return {viewer,error,loading}
 
 }

@@ -44,7 +44,7 @@ return (
      >
 
       <div className="fixed top-0 w-full z-30 h-[10%]">
-      <Toolbar avatarUrl={""} />
+      <Toolbar avatarUrl={response.avatarUrl} />
       </div>
         
       <div className="mt-[55px] w-full h-[90%]">

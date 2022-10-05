@@ -19,8 +19,8 @@ return (
    <div className='h-full w-full flex justify-evenly items-center '>
     <button
       onClick={()=>{action();setOpen(false)}}
-            className='dark:bg-slate-500 p-5 w-[30%] rounded-md hover:bg-yellow-700 text-2xl
-   font-bold border border-black'
+          className='dark:bg-slate-500 p-5 w-[30%] rounded-md hover:bg-yellow-700 text-2xl
+            font-bold border border-black'
     >YES</button>
     
     <button

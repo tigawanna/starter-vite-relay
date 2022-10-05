@@ -29,9 +29,11 @@ interface MainViewProps {
 }
 
 export const MainView: React.FC<MainViewProps> = ({ isLoggedIn }) => {
-const {error,viewer} = useCheckToken()
+const {error,viewer,loading} = useCheckToken()
 console.log("main viewer error ",viewer,error)
-
+  if (loading){
+    return <LoadingShimmer/>
+  }
   if (viewer && !error) {
     return <AuthedView />
   }

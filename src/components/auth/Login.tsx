@@ -21,8 +21,8 @@ const token = useLocalStoreValues(state => state?.localValues?.token)
 const updateToken=useLocalStoreValues(state=>state.updateToken)
 
 const handleSubmit = async (data: any) => {
-   updateToken(data.token)
-  return <Navigate to="/" />;
+  updateToken(data.token)
+
 };
 
 const validate = ({ input, setError }: Validate) => {

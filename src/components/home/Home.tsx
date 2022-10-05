@@ -13,12 +13,13 @@ import { Home_user$data } from './__generated__/Home_user.graphql';
 
 
 interface HomeProps {
-    viewer: AppROOTVIEWERQuery$data
+  viewerData: AppROOTVIEWERQuery$data
 }
 
-export const Home: React.FC<HomeProps> = ({viewer}) => {
+export const Home: React.FC<HomeProps> = ({viewerData}) => {
+
 const [currTab, setCurrTab] = useState<string>("repo")
-const data = useFragment(HomeVIEWERfragmant, viewer.viewer);
+const data = useFragment(HomeVIEWERfragmant, viewerData.viewer);
 console.log("data in home from fragment === ", data)
 
 const response = data as Home_user$data
@@ -31,7 +32,7 @@ const response = data as Home_user$data
 return (
     <div className="min-h-screen h-full flex flex-col justify-start">
         <div className="h-[20%]">
-            <ProfileInfo viewer={viewer}/>
+            <ProfileInfo viewer={viewerData}/>
         </div>
 
         <div className="min-h-[80%] flex flex-col justify-start">

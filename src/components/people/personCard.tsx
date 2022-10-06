@@ -1,8 +1,9 @@
 import { Link } from "@tanstack/react-location";
 import { useState } from "react";
-import { useFragment } from "react-relay";
+import { useFragment, useMutation } from "react-relay";
 import { graphql } from "relay-runtime";
-import { OneUser } from "./utils/types";
+import { PersonCardfollowMutation } from "./__generated__/PersonCardfollowMutation.graphql";
+import { PersonCardunfollowMutation } from "./__generated__/PersonCardunfollowMutation.graphql";
 import { PersonCard_user$data } from "./__generated__/PersonCard_user.graphql";
 
 
@@ -14,15 +15,19 @@ personRef:any
 export const PersonCard: React.FC<PersonCardProps> = ({ personRef}) => {
 const data = useFragment(PersonCardFragment, personRef);
 const dev = data as PersonCard_user$data
-// console.log("mini user gql query ", data);
 const [yes, setYes] = useState<any>(dev?.viewerIsFollowing);
+  const [followMutation, isFollowMutationInFlight] = useMutation<PersonCardfollowMutation>(FOLLOWUSER)
+  const [unfollowMutation, isUnFollowMutationInFlight] = useMutation<PersonCardunfollowMutation>(UNFOLLOWUSER)
+
 const followThem = (their_id: string) => {
-    setYes(true);
-    // followUser(their_name, token);
+  setYes(true);
+  followMutation({variables:{input: { userId: their_id }}})
+ // followUser(their_name, token);
     // followMutation.mutate({input:{userId:their_id}})
-  };
+};
   const unfollowThem = (their_id: string) => {
     setYes(false);
+    unfollowMutation({ variables: { input: { userId: their_id } } })
     // unfollowUser(their_name, token);
     // unfollowMutation.mutate({input:{userId:their_id}})
   };
@@ -59,7 +64,7 @@ const followThem = (their_id: string) => {
         </div>
       </div>
    </Link>
-   
+
      <div className="w-full  flex-center">
       {!dev?.isViewer?
        <div className="w-full  flex-center">
@@ -109,4 +114,21 @@ export const PersonCardFragment = graphql`
     location
     url
     }
+`;
+
+
+export const FOLLOWUSER = graphql`
+  mutation PersonCardfollowMutation($input: FollowUserInput!) {
+    followUser(input: $input) {
+      clientMutationId
+    }
+  }
+`;
+
+export const UNFOLLOWUSER = graphql`
+mutation PersonCardunfollowMutation($input:UnfollowUserInput!){
+  unfollowUser(input:$input){
+    clientMutationId
+  }
+}
 `;

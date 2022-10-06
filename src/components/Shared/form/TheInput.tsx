@@ -1,9 +1,10 @@
 import React from 'react'
-import { FormOptions } from '../../../App';
+import { FormOptions } from './TheForm';
 
 interface TheInputProps {
   handleChange(event: React.ChangeEvent<HTMLInputElement>): Promise<void>;
   item: FormOptions
+  autoComplete?:"on"|"off"
   input: { name: string };
   error: {
     name: string;
@@ -15,7 +16,8 @@ export const TheInput: React.FC<TheInputProps> = ({
     handleChange,
     error,
     input,
-    item
+    item,
+    autoComplete
 }) => {
 
 
@@ -41,7 +43,7 @@ return (
       type={item.field_type}
       placeholder={"enter " + item.field_name}
       onChange={handleChange}
-      autoComplete={"off"}
+      autoComplete={autoComplete??"off"}
       // @ts-ignore
       value={input[item.field_name]}
     />

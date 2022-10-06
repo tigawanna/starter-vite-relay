@@ -4,10 +4,11 @@ import { TheButton } from './../TheButton';
 import { TheSelect } from "./TheSelect";
 
 type FormError = { name: string; message: string };
-interface FormOptions {
+export interface FormOptions {
   field_name: string;
   field_type: string;
   default_value: string | number
+  autoComplete?:"off"|"on"
   options?: { name: string; value: string }[]
 }
 
@@ -69,14 +70,9 @@ class TheForm extends React.Component<Props, State> {
     }
     else {
       try {
-        // this.setError({ name: "", message: "" });
         const result = await this.props.submitFn(this.state.input);
-
-        console.log("save result === ", result);
-        console.log("A name was submitted: ", this.state.input);
-      } catch (err: any) {
-        console.log("error adding item", err.message);
-        this.setError({ name: "main", message: err.message });
+       } catch (err: any) {
+       this.setError({ name: "main", message: err.message });
       }
 
     }
@@ -121,6 +117,7 @@ class TheForm extends React.Component<Props, State> {
                 handleChange={this.handleChange}
                 input={this.state.input}
                 item={item}
+                autoComplete={"on"}
                  />
                 </div>
                  )

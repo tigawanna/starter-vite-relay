@@ -19,8 +19,8 @@ interface FollowersProps {
 export const Followers: React.FC<FollowersProps> = ({ refs }) => {
 
 
-  const followers_data = usePaginationFragment<FollowersPaginationQuery, 
-  any>(FollowersFragment, refs);
+  const followers_data = usePaginationFragment<FollowersPaginationQuery, any>
+  (FollowersFragment, refs);
   const followers = followers_data.data as Followers_followers$data
 
   return (

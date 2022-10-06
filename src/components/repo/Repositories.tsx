@@ -12,54 +12,40 @@ import {
 } from "react-icons/si";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { TheIcon } from "../Shared/TheIcon";
-import { REPOS } from "./utils/query";
-import {
-  REPONODE,
-  REPOPAGE,
-  ROOTREPO,
-} from "./utils/type";
-import { concatPages } from "./utils/helper";
-
+import { REPONODE } from "./utils/type";
 import { Loading } from "../Shared/Loading";
-import { FragmentRefs, graphql } from "relay-runtime";
-import { App_user$data } from "../../__generated__/App_user.graphql";
-import {
-  useFragment,
-  usePaginationFragment,
-} from "react-relay";
-import { HomeVIEWERQuery$data } from "../home/__generated__/HomeVIEWERQuery.graphql";
+import { FragmentRefs,graphql } from "relay-runtime";
+import { usePaginationFragment } from "react-relay";
 import { RepositoriesPaginationQuery } from "./__generated__/RepositoriesPaginationQuery.graphql";
 import { Repositories_repositories$data } from "./__generated__/Repositories_repositories.graphql";
-
 
 dayjs.extend(relativeTime);
 interface RepositoryProps {
   refs: {
-    readonly " $fragmentSpreads":
-    FragmentRefs<"Followers_followers" | "Following_following" | "Repositories_repositories">;
-  } | null
+    readonly " $fragmentSpreads": FragmentRefs<
+      | "Followers_followers"
+      | "Following_following"
+      | "Repositories_repositories"
+    >;
+  } | null;
 }
 
-export const Repositories: React.FC<RepositoryProps> = ({ refs }) => {
+export const Repositories: React.FC<
+  RepositoryProps
+> = ({ refs }) => {
   const [keyword, setKeyword] = useState({
     word: "",
   });
 
-  //@ts-ignore
-  const repos_data = usePaginationFragment<RepositoriesPaginationQuery,_
-  >(RepositoriesFragment,refs);
-  // console.log("repo viewer data ===   ==== ",repos_data)
-  const action = () => {
-    //console.log("test query === ", keyword);
-    setKeyword({ word: "" });
-    // results.items = []
-  };
+ const repos_data = usePaginationFragment<RepositoriesPaginationQuery,any>(RepositoriesFragment, refs);
+const action = () => {
+  setKeyword({ word: "" });
+};
 
   const repos =
     repos_data.data as Repositories_repositories$data;
   const totalReposloaded =
     repos.repositories.edges?.length;
-
 
   return (
     <div className="min-h-screen w-full  flex flex-col justify-start">
@@ -89,21 +75,20 @@ export const Repositories: React.FC<RepositoryProps> = ({ refs }) => {
           (repo) => {
             return (
               <RepoCard
-              //@ts-ignore
+                //@ts-ignore
                 repo={repo?.node}
                 key={repo?.node?.id}
               />
             );
           }
         )}
-
-
       </div>
-      {repos_data.hasNext && !repos_data.isLoadingNext ? (
+      {repos_data.hasNext &&
+      !repos_data.isLoadingNext ? (
         <button
           className="m-2 hover:text-purple-400 shadow-lg hover:shadow-purple"
           onClick={() => {
-            repos_data.loadNext(10)
+            repos_data.loadNext(10);
           }}
         >
           --- load more ---
@@ -143,23 +128,22 @@ export const RepoCard: React.FC<
           {repo?.name}
         </div>
         <div className="flex flex-wrap text-color">
-           {
-           repo?.languages.edges.map((item) => {
-          return (
-            <div
-              key={item.node.id}
-              style={{
-                borderStyle: "solid",
-                borderWidth: "2px",
-                borderColor: item.node.color,
-                borderRadius: "10%",
-              }}
-              className="p-[1px] m-[1px] text-[10px] font-semibold md:text-[10px]   break-all"
-            >
-              {item.node.name}
-            </div>
-          );
-        })}
+          {repo?.languages.edges.map((item) => {
+            return (
+              <div
+                key={item.node.id}
+                style={{
+                  borderStyle: "solid",
+                  borderWidth: "2px",
+                  borderColor: item.node.color,
+                  borderRadius: "10%",
+                }}
+                className="p-[1px] m-[1px] text-[10px] font-semibold md:text-[10px]   break-all"
+              >
+                {item.node.name}
+              </div>
+            );
+          })}
         </div>
         <div className="text-[14px] md:text-[11px] break-word  max-h-[45%] overflow-y-clip ">
           {repo?.description}
@@ -258,7 +242,14 @@ export const RepositoriesFragment = graphql`
   @refetchable(
     queryName: "RepositoriesPaginationQuery"
   ) {
-    repositories(first: $first, after: $after , orderBy: { field: PUSHED_AT, direction: DESC })
+    repositories(
+      first: $first
+      after: $after
+      orderBy: {
+        field: PUSHED_AT
+        direction: DESC
+      }
+    )
       @connection(
         key: "Repositories_repositories"
       ) {

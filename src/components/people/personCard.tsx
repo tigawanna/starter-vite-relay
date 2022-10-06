@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-location";
 import { useState } from "react";
 import { useFragment } from "react-relay";
 import { graphql } from "relay-runtime";
@@ -34,8 +35,9 @@ const followThem = (their_id: string) => {
       <div className="w-full h-full flex flex-col 
       justify-between
        hover:shadow-md m-1 p-2 border-[1px] border-black dark:border-white rounded-sm">
-    <a href={'/profile/'+ dev?.login}>
-      <div className=" flex items-center justify-between min-w-[60%] cursor-pointer w-full">
+      
+      <Link to={'/profile/' + dev?.login}>
+       <div className=" flex items-center justify-between min-w-[60%] cursor-pointer w-full">
         <div className="h-full w-16 mx-2">
          <img
           className="h-[80%] w-fit rounded-[50%] m-1 border border-white"
@@ -56,8 +58,8 @@ const followThem = (their_id: string) => {
           </div>
         </div>
       </div>
-
-      </a>
+   </Link>
+   
      <div className="w-full  flex-center">
       {!dev?.isViewer?
        <div className="w-full  flex-center">

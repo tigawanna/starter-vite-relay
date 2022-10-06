@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import dayjs from "dayjs";
 import { IoLocationOutline } from "react-icons/io5";
 import { AiOutlineMail } from "react-icons/ai";
@@ -6,20 +6,22 @@ import { TbPoint, TbBrandTwitter } from "react-icons/tb";
 import { MdCorporateFare } from "react-icons/md";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { TheIcon } from "../Shared/TheIcon";
-import { graphql } from "relay-runtime";
-import { AppROOTVIEWERQuery$data } from "../../__generated__/AppROOTVIEWERQuery.graphql";
+import { FragmentRefs, graphql } from "relay-runtime";
 import { useFragment } from "react-relay";
 import { ProfileInfo_user$data } from "./__generated__/ProfileInfo_user.graphql";
 dayjs.extend(relativeTime);
 
 interface ProfileInfoProps {
-  viewer: AppROOTVIEWERQuery$data
+  refs: {
+    readonly " $fragmentSpreads": 
+    FragmentRefs<"ProfileInfo_user" | "Profile_user" | "App_user" | "Home_user" | any>;
+  } | null
 }
 
-export const ProfileInfo: React.FC<ProfileInfoProps> = ({ viewer }) => {
+export const ProfileInfo: React.FC<ProfileInfoProps> = ({refs}) => {
   // console.log("profile info props ===   ==== ",user,token)
-const data = useFragment(ProfileInfoVIEWERfragmant, viewer.viewer);
-// console.log("data in profile fromfragment === ", data)
+const data = useFragment(ProfileInfoVIEWERfragmant, refs);
+console.log("data in profile from fragment === ", data)
 
 
  const user= data as ProfileInfo_user$data

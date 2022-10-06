@@ -25,8 +25,8 @@ export const Home: React.FC<HomeProps> = ({viewerData,viewer_info}) => {
 
 const [currTab, setCurrTab] = useState<string>("repo")
 const data = useFragment(HomeVIEWERfragmant, viewerData.viewer);
-const tabsData = useLazyLoadQuery<HomeVIEWERQuery>(HomeViewerQuery, {});
 
+const tabsData = useLazyLoadQuery<HomeVIEWERQuery>(HomeViewerQuery, {});
 //  console.log("response viewer info == ",viewer_info)
 
 const response = data as Home_user$data
@@ -36,10 +36,11 @@ const response = data as Home_user$data
     ['following', response?.repositories?.totalCount]
 ]
 
+const refs= tabsData.viewer
 return (
     <div className=" h-full flex flex-col justify-start">
         <div className="h-[20%]">
-            <ProfileInfo viewer={viewerData}/>
+            <ProfileInfo refs={viewerData.viewer}/>
         </div>
 
         <div className="min-h-[80%] flex flex-col justify-start">
@@ -60,20 +61,19 @@ return (
 
             {currTab === "repo" ? (
                 <Repositories
-                    user={viewer_info}
-                    viewerData={tabsData}
+                  refs={tabsData.viewer}
                 />
             ) : null}
 
              {currTab === "followers" ? (
                 <Followers
-                    viewerData={tabsData}
+                    refs={tabsData.viewer}
                 />
             ) : null} 
 
             {currTab === "following" ? (
                 <Following
-                   viewerData={tabsData}
+                   refs={tabsData.viewer}
        
                 />
             ) : null}  

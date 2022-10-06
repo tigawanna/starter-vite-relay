@@ -20,17 +20,13 @@ import { Login } from './components/auth/Login';
 
 const {localValues} = useLocalStoreValues.getState()
 
-
-
-
-
 interface MainViewProps {
   isLoggedIn: boolean
 }
 
 export const MainView: React.FC<MainViewProps> = ({ isLoggedIn }) => {
 const {error,viewer,loading} = useCheckToken()
-console.log("main viewer error ",viewer,error)
+
   if (loading){
     return <LoadingShimmer/>
   }

@@ -21,7 +21,7 @@ import {
 import { concatPages } from "./utils/helper";
 
 import { Loading } from "../Shared/Loading";
-import { graphql } from "relay-runtime";
+import { FragmentRefs, graphql } from "relay-runtime";
 import { App_user$data } from "../../__generated__/App_user.graphql";
 import {
   useFragment,
@@ -30,22 +30,24 @@ import {
 import { HomeVIEWERQuery$data } from "../home/__generated__/HomeVIEWERQuery.graphql";
 import { RepositoriesPaginationQuery } from "./__generated__/RepositoriesPaginationQuery.graphql";
 import { Repositories_repositories$data } from "./__generated__/Repositories_repositories.graphql";
-import { RiCopperCoinLine } from "react-icons/ri";
+
 
 dayjs.extend(relativeTime);
 interface RepositoryProps {
-  user: App_user$data;
-  viewerData: HomeVIEWERQuery$data;
+  refs: {
+    readonly " $fragmentSpreads":
+    FragmentRefs<"Followers_followers" | "Following_following" | "Repositories_repositories">;
+  } | null
 }
 
-export const Repositories: React.FC<RepositoryProps> = ({ user, viewerData }) => {
+export const Repositories: React.FC<RepositoryProps> = ({ refs }) => {
   const [keyword, setKeyword] = useState({
     word: "",
   });
 
   //@ts-ignore
   const repos_data = usePaginationFragment<RepositoriesPaginationQuery,_
-  >(RepositoriesFragment, viewerData.viewer);
+  >(RepositoriesFragment,refs);
   // console.log("repo viewer data ===   ==== ",repos_data)
   const action = () => {
     //console.log("test query === ", keyword);
@@ -127,7 +129,7 @@ export const RepoCard: React.FC<
   // console.log(repo.html_url)
   // const repo_link = authedurl(repo.html_url,token)
   const vslink = `https://vscode.dev/${repo.url}`;
-  console.log("repo node", repo);
+
   return (
     <div
       className=" min-h-fit h-56 m-2 w-[95%] md:w-[40%] lg:w-[30%] p-5 flex-col 

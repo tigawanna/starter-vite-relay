@@ -5,13 +5,15 @@ import React from 'react'
 
 import { Toolbar } from './components/Navigation/Toolbar/Toolbar';
 import ErrorBoundary from './components/Shared/ErrorBoundary';
-import { graphql, PreloadedQuery, usePreloadedQuery } from 'react-relay/hooks';
+import { graphql, loadQuery, PreloadedQuery, usePreloadedQuery } from 'react-relay/hooks';
 import { AppROOTVIEWERQuery } from './__generated__/AppROOTVIEWERQuery.graphql';
 import { Home } from './components/home/Home';
 import { Test } from './components/test/Test';
 import { useFragment } from 'react-relay';
 import { App_user$data } from './__generated__/App_user.graphql';
-
+import { Profile } from './components/people/Profile';
+import RelayEnvironment from './relay/RelayEnviroment'
+import { AppPROFILEVIEWERQuery } from './__generated__/AppPROFILEVIEWERQuery.graphql';
 
 
 interface AppProps {
@@ -39,6 +41,22 @@ return (
      <Router location={location} 
       routes={[
         { path: "/", element: <Home viewerData={viewerData} viewer_info={response}/> },
+        { 
+        path: "profile",
+         children:[
+           { 
+            path: ':username',
+             loader: async ({ params: { username } }) => ({
+               userQueryRef: loadQuery<AppPROFILEVIEWERQuery>(
+                 RelayEnvironment,
+                 PROFILEVIEWER, { login:username }
+               )
+               }),
+           element: <Profile /> 
+          }
+         ] 
+    
+         },
         { path: "test", element: <Test /> },
       ]}
      >
@@ -59,6 +77,8 @@ return (
 }
 
 export default App
+
+
 
 export const AppVIEWERfragmant = graphql`
 # github graphql query to get more details
@@ -83,5 +103,13 @@ export const ROOTVIEWER = graphql`
   }
 `;
 
-
+export const PROFILEVIEWER = graphql`
+# github graphql query to get more details
+  query AppPROFILEVIEWERQuery($login:String!){
+   user(login:$login){
+    ...Profile_user
+    ...ProfileInfo_user
+    }
+  }
+`;
 

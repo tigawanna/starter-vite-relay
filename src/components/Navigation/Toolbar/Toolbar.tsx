@@ -55,6 +55,9 @@ return (
         <Link to="/test">
          test
         </Link>
+        <Link to="/profile/oswhytecodes">
+          profile
+        </Link>
 
         <div
           onClick={() => setOpen(true)}

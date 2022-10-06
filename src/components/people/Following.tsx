@@ -1,6 +1,6 @@
 import React from "react";
 
-import { graphql } from "relay-runtime";
+import { FragmentRefs, graphql } from "relay-runtime";
 import { FollowingPaginationQuery } from "./__generated__/FollowingPaginationQuery.graphql";
 import { HomeVIEWERQuery$data } from "../home/__generated__/HomeVIEWERQuery.graphql";
 import { Following_following$data } from "./__generated__/Following_following.graphql";
@@ -10,13 +10,17 @@ import { PersonCard } from './PersonCard';
 
 
 interface FollowingProps {
-  viewerData: HomeVIEWERQuery$data;
+  refs: {
+    readonly " $fragmentSpreads":
+    FragmentRefs<"Followers_followers" | "Following_following" | "Repositories_repositories">;
+  } | null
 }
 
-export const Following: React.FC<FollowingProps> = ({ viewerData }) => {
+export const Following: React.FC<FollowingProps> = ({ refs }) => {
 
 
-const following_data = usePaginationFragment<FollowingPaginationQuery,any>(FollowingFragment, viewerData.viewer);
+const following_data = usePaginationFragment<FollowingPaginationQuery,any>
+(FollowingFragment, refs);
 const following = following_data.data as Following_following$data
 
 return (

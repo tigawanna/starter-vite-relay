@@ -34,7 +34,7 @@ const response = data as App_user$data
 return (
   <div className='w-full min-h-screen h-full flex flex-col justify-between
    dark:bg-slate-800 dark:text-white transition ease-linear delay-100 
-  last:overflow-y-hidden'>
+  '>
      <ErrorBoundary>
      <Router location={location} 
       routes={[

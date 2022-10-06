@@ -37,14 +37,14 @@ const response = data as Home_user$data
 ]
 
 return (
-    <div className="min-h-screen h-full flex flex-col justify-start">
+    <div className=" h-full flex flex-col justify-start">
         <div className="h-[20%]">
             <ProfileInfo viewer={viewerData}/>
         </div>
 
         <div className="min-h-[80%] flex flex-col justify-start">
         <div className="w-full flex items-center justify-evenly 
-        flex-wrap sticky z-20 top-[100px] dark:bg-slate-700 bg-white">
+           sticky z-30 top-[50px] dark:bg-slate-700 bg-white text-xl">
                 {tabs.map((item, index) => {
                     return (
                         <TabItem

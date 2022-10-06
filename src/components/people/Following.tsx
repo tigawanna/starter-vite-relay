@@ -36,7 +36,7 @@ return (
         })}
       </div>
 
-      {following_data.hasNext ? (
+      {following_data.hasNext && !following_data.isLoadingNext?(
         <button
           className="m-2 hover:text-purple-400 shadow-lg hover:shadow-purple"
           onClick={() => {

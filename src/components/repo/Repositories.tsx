@@ -57,14 +57,7 @@ export const Repositories: React.FC<RepositoryProps> = ({ user, viewerData }) =>
     repos_data.data as Repositories_repositories$data;
   const totalReposloaded =
     repos.repositories.edges?.length;
-  // console.log("no of loadeds items ==== ",totalRepsLoaded)
-  // console.log("in pepos === ", query.data);
 
-  console.log("viewr data === ", repos);
-
-  // const {repos,query} = useRepos(token,username as string,keyword.word)
-
-  // console.log("repo filter results ==== ",results)
 
   return (
     <div className="min-h-screen w-full  flex flex-col justify-start">
@@ -102,23 +95,24 @@ export const Repositories: React.FC<RepositoryProps> = ({ user, viewerData }) =>
           }
         )}
 
-        {repos_data.hasNext ? (
-          <button
-            className="m-2 hover:text-purple-400 shadow-lg hover:shadow-purple"
-            onClick={() => {
-              repos_data.loadNext(10)
-            }}
-          >
-            --- load more ---
-          </button>
-        ) : null}
 
-        {repos_data.isLoadingNext ? (
-          <div className="w-full flex-center">
-            <Loading size={20} />
-          </div>
-        ) : null}
       </div>
+      {repos_data.hasNext && !repos_data.isLoadingNext ? (
+        <button
+          className="m-2 hover:text-purple-400 shadow-lg hover:shadow-purple"
+          onClick={() => {
+            repos_data.loadNext(10)
+          }}
+        >
+          --- load more ---
+        </button>
+      ) : null}
+
+      {repos_data.isLoadingNext ? (
+        <div className="w-full flex-center">
+          <Loading size={20} />
+        </div>
+      ) : null}
     </div>
   );
 };

@@ -22,7 +22,7 @@ export const Followers: React.FC<FollowersProps> = ({ viewerData }) => {
     <div className="min-h-screen w-full flex flex-col justify-start h-full mb-5 ">
       <div className="h-fit w-full flex-center  flex-wrap">
         {followers?.followers?.edges?.map((follow, index) => {
-          console.log("follow node === ", follow)
+         
           return (
             <PersonCard
               key={index}
@@ -32,7 +32,7 @@ export const Followers: React.FC<FollowersProps> = ({ viewerData }) => {
 
         })}
       </div>
-      {followers_data.hasNext ? (
+      {followers_data.hasNext && !followers_data.isLoadingNext ? (
         <button
           className="m-2 hover:text-purple-400 shadow-lg hover:shadow-purple"
           onClick={() => {

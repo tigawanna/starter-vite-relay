@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<df9a19f2d193d03460522c07868621f4>>
+ * @generated SignedSource<<534d6811204fbe56a233377f908ffcda>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -172,7 +172,14 @@ v15 = {
   "kind": "ScalarField",
   "name": "totalCount",
   "storageKey": null
-};
+},
+v16 = [
+  {
+    "kind": "Literal",
+    "name": "first",
+    "value": 20
+  }
+];
 return {
   "fragment": {
     "argumentDefinitions": [
@@ -469,7 +476,7 @@ return {
           },
           {
             "alias": null,
-            "args": (v5/*: any*/),
+            "args": (v16/*: any*/),
             "concreteType": "LanguageConnection",
             "kind": "LinkedField",
             "name": "languages",
@@ -511,11 +518,11 @@ return {
               (v13/*: any*/),
               (v15/*: any*/)
             ],
-            "storageKey": "languages(first:5)"
+            "storageKey": "languages(first:20)"
           },
           {
             "alias": null,
-            "args": (v5/*: any*/),
+            "args": (v16/*: any*/),
             "filters": null,
             "handle": "connection",
             "key": "Languages_languages",
@@ -528,12 +535,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "382e648c1ecab81734f269dc9ded7920",
+    "cacheID": "0a0b338a0de6f1b0d8040bdb6514815e",
     "id": null,
     "metadata": {},
     "name": "OnerepoFullRepoQuery",
     "operationKind": "query",
-    "text": "query OnerepoFullRepoQuery(\n  $repoowner: String!\n  $reponame: String!\n) {\n  repository(owner: $repoowner, name: $reponame) {\n    nameWithOwner\n    forkCount\n    ...Stars_stargazers\n    ...Branches_refs\n    ...Languages_languages\n    id\n  }\n}\n\nfragment Branches_refs on Repository {\n  refs(refPrefix: \"refs/heads/\", orderBy: {direction: DESC, field: TAG_COMMIT_DATE}, first: 3) {\n    edges {\n      node {\n        name\n        id\n        target {\n          __typename\n          ...Commits_history\n          id\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment Commits_history on Commit {\n  history(first: 5) {\n    edges {\n      node {\n        committedDate\n        author {\n          name\n          email\n        }\n        message\n        url\n        pushedDate\n        authoredDate\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n    totalCount\n  }\n  id\n}\n\nfragment Languages_languages on Repository {\n  languages(first: 5) {\n    edges {\n      node {\n        id\n        color\n        name\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n    totalCount\n  }\n  id\n}\n\nfragment Stars_stargazers on Repository {\n  stargazers(first: 5) {\n    edges {\n      cursor\n      node {\n        name\n        email\n        avatarUrl\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  id\n}\n"
+    "text": "query OnerepoFullRepoQuery(\n  $repoowner: String!\n  $reponame: String!\n) {\n  repository(owner: $repoowner, name: $reponame) {\n    nameWithOwner\n    forkCount\n    ...Stars_stargazers\n    ...Branches_refs\n    ...Languages_languages\n    id\n  }\n}\n\nfragment Branches_refs on Repository {\n  refs(refPrefix: \"refs/heads/\", orderBy: {direction: DESC, field: TAG_COMMIT_DATE}, first: 3) {\n    edges {\n      node {\n        name\n        id\n        target {\n          __typename\n          ...Commits_history\n          id\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment Commits_history on Commit {\n  history(first: 5) {\n    edges {\n      node {\n        committedDate\n        author {\n          name\n          email\n        }\n        message\n        url\n        pushedDate\n        authoredDate\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n    totalCount\n  }\n  id\n}\n\nfragment Languages_languages on Repository {\n  languages(first: 20) {\n    edges {\n      node {\n        id\n        color\n        name\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n    totalCount\n  }\n  id\n}\n\nfragment Stars_stargazers on Repository {\n  stargazers(first: 5) {\n    edges {\n      cursor\n      node {\n        name\n        email\n        avatarUrl\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  id\n}\n"
   }
 };
 })();

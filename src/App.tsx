@@ -17,6 +17,7 @@ import { AppPROFILEVIEWERQuery } from './__generated__/AppPROFILEVIEWERQuery.gra
 
 import { OnerepoFullRepoQuery } from './components/repo/__generated__/onerepoFullRepoQuery.graphql';
 import { FULLREPO, Onerepo } from './components/repo/onerepo/Onerepo';
+import { Search } from './components/search/Search';
 
 
 
@@ -79,6 +80,7 @@ return (
         ]
         
         },
+        { path: "search", element: <Search /> },
         { path: "test", element: <Test /> },
       ]}
      >

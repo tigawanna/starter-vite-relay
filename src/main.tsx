@@ -16,7 +16,7 @@ import { AppROOTVIEWERQuery } from './__generated__/AppROOTVIEWERQuery.graphql';
 import ErrorBoundary from './components/Shared/ErrorBoundary';
 import { useCheckToken } from './utils/useCheckToken';
 import { Login } from './components/auth/Login';
-
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const {localValues} = useLocalStoreValues.getState()
 
@@ -56,9 +56,21 @@ const rootQueryRef= loadQuery<AppROOTVIEWERQuery>(
 );
 
 export const AuthedView: React.FC<mainProps> = ({ }) => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+        refetchOnMount: false,
+        refetchOnReconnect: false,
+        retry: false,
+        staleTime: 5 * 60 * 1000,
+      },
+    },
+  });
 
   return (
     <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
       <RelayEnvironmentProvider environment={RelayEnvironment}>
         <Suspense fallback={<LoadingShimmer />}>
           <React.StrictMode>
@@ -66,6 +78,7 @@ export const AuthedView: React.FC<mainProps> = ({ }) => {
             </React.StrictMode>
         </Suspense>
       </RelayEnvironmentProvider>
+      </QueryClientProvider>
     </ErrorBoundary>
   );
 }

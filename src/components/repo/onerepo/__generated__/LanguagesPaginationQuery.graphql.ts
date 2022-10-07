@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<f57ca80c783a631823adee93decf1a53>>
+ * @generated SignedSource<<ff505a42f70a3fd8f68071be7a6aabf1>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -33,7 +33,7 @@ var v0 = [
     "name": "after"
   },
   {
-    "defaultValue": 5,
+    "defaultValue": 20,
     "kind": "LocalArgument",
     "name": "first"
   },
@@ -243,16 +243,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "e802f4f3f2afb1f70df5dfd4de9c7593",
+    "cacheID": "f3a44b7757063fa8279650047a970904",
     "id": null,
     "metadata": {},
     "name": "LanguagesPaginationQuery",
     "operationKind": "query",
-    "text": "query LanguagesPaginationQuery(\n  $after: String\n  $first: Int = 5\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...Languages_languages_2HEEH6\n    id\n  }\n}\n\nfragment Languages_languages_2HEEH6 on Repository {\n  languages(first: $first, after: $after) {\n    edges {\n      node {\n        id\n        color\n        name\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n    totalCount\n  }\n  id\n}\n"
+    "text": "query LanguagesPaginationQuery(\n  $after: String\n  $first: Int = 20\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...Languages_languages_2HEEH6\n    id\n  }\n}\n\nfragment Languages_languages_2HEEH6 on Repository {\n  languages(first: $first, after: $after) {\n    edges {\n      node {\n        id\n        color\n        name\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n    totalCount\n  }\n  id\n}\n"
   }
 };
 })();
 
-(node as any).hash = "4529c41ab72f3254ae3e1079a085eb73";
+(node as any).hash = "9cc425dbe7f0db2c1d67b09abdd252f3";
 
 export default node;

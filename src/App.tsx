@@ -14,8 +14,9 @@ import { App_user$data } from './__generated__/App_user.graphql';
 import { Profile } from './components/people/Profile';
 import RelayEnvironment from './relay/RelayEnviroment'
 import { AppPROFILEVIEWERQuery } from './__generated__/AppPROFILEVIEWERQuery.graphql';
-import { FULLREPO, Onerepo } from './components/repo/onerepo';
+
 import { OnerepoFullRepoQuery } from './components/repo/__generated__/onerepoFullRepoQuery.graphql';
+import { FULLREPO, Onerepo } from './components/repo/onerepo/Onerepo';
 
 
 

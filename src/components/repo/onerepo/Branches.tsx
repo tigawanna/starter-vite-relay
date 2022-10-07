@@ -5,13 +5,13 @@ import {
   usePaginationFragment,
 } from "react-relay/hooks";
 import { FragmentRefs } from "relay-runtime";
-import { TheIcon } from "../Shared/TheIcon";
+import { TheIcon } from "../../Shared/TheIcon";
 import { Commits } from "./Commits";
-import { BranchesPaginationQuery } from "./__generated__/BranchesPaginationQuery.graphql";
+import { BranchesPaginationQuery } from "../__generated__/BranchesPaginationQuery.graphql";
 import {
   Branches_refs$data,
   Branches_refs$key,
-} from "./__generated__/Branches_refs.graphql";
+} from "../__generated__/Branches_refs.graphql";
 
 interface BranchesProps {
   data: Branches_refs$key | null;

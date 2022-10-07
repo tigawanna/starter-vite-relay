@@ -1,8 +1,9 @@
 import React from 'react'
-import { graphql, PreloadedQuery, useLazyLoadQuery, usePreloadedQuery } from 'react-relay/hooks';
-import { OnerepoFullRepoQuery } from './__generated__/onerepoFullRepoQuery.graphql';
+import { graphql, PreloadedQuery, usePreloadedQuery } from 'react-relay/hooks';
+
 import { Branches } from './Branches';
 import { MakeGenerics, useMatch } from '@tanstack/react-location';
+import { OnerepoFullRepoQuery } from '../__generated__/onerepoFullRepoQuery.graphql';
 
 
 interface onerepoProps {

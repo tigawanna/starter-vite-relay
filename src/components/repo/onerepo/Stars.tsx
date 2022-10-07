@@ -5,8 +5,8 @@ import {
   usePaginationFragment,
 } from "react-relay";
 
-import { StarsPaginationQuery,StarsPaginationQuery$data } from "./__generated__/StarsPaginationQuery.graphql";
-import { Stars_stargazers$data, Stars_stargazers$key } from "./__generated__/Stars_stargazers.graphql";
+import { StarsPaginationQuery,StarsPaginationQuery$data } from "../__generated__/StarsPaginationQuery.graphql";
+import { Stars_stargazers$data, Stars_stargazers$key } from "../__generated__/Stars_stargazers.graphql";
 import { FragmentRefs } from 'relay-runtime';
 
 interface StarsProps {

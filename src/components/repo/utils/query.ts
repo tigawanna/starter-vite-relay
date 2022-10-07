@@ -1,7 +1,6 @@
 import gql from "graphql-tag";
 
-
-export const REPOSWITHOUTRECENTCOMMIT = gql`
+const REPOSWITHOUTRECENTCOMMIT = gql`
          query getRepos($name: String!, $first: Int, $after: String) {
            user(login: $name) {
              login
@@ -71,8 +70,7 @@ const RECENTREPOCOMMIT = gql`
   }
 `;
 
-
-export const REPOS = gql`
+const REPOS = gql`
          query getRepos($name: String!, $first: Int, $after: String) {
            user(login: $name) {
              login

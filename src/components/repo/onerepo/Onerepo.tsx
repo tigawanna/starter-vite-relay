@@ -4,6 +4,7 @@ import { graphql, PreloadedQuery, usePreloadedQuery } from 'react-relay/hooks';
 import { Branches } from './Branches';
 import { MakeGenerics, useMatch } from '@tanstack/react-location';
 import { OnerepoFullRepoQuery } from '../__generated__/onerepoFullRepoQuery.graphql';
+import { Stars } from './Stars';
 
 
 interface onerepoProps {
@@ -44,7 +45,7 @@ return (
     </div>
     <div className='w-full flex-center-col p-5 h-full'>
       <Branches data={data.repository}/>
-      {/* <Stars data={data.repository}/> */}
+      <Stars data={data.repository}/>
 
     </div>    
    
@@ -63,6 +64,7 @@ export const FULLREPO = graphql`
     forkCount,
     ...Stars_stargazers
     ...Branches_refs
+    ...Languages_languages
     # stargazers(after:$after,first:$first)  @connection(key: "Stars_stargazers"){
     #   ...Stars_stars
     # }

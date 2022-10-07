@@ -1,31 +1,18 @@
 import React from "react";
-import {
-  graphql,
-  useFragment,
-  usePaginationFragment,
-} from "react-relay";
-
-import { StarsPaginationQuery,StarsPaginationQuery$data } from "../__generated__/StarsPaginationQuery.graphql";
+import { graphql,usePaginationFragment } from "react-relay";
+import { StarsPaginationQuery } from "../__generated__/StarsPaginationQuery.graphql";
 import { Stars_stargazers$data, Stars_stargazers$key } from "../__generated__/Stars_stargazers.graphql";
-import { FragmentRefs } from 'relay-runtime';
-
 interface StarsProps {
   data: Stars_stargazers$key | null
 }
 
-export const Stars: React.FC<StarsProps> = ({
-  data,
-}) => {
-  // console.log("data == in child", data);
-
-// @ts-ignore 
-  const fragData = usePaginationFragment<StarsPaginationQuery,_>(
+export const Stars: React.FC<StarsProps> = ({data}) => {
+const fragData = usePaginationFragment<StarsPaginationQuery,any>(
       StarGazersFragment,
       data
     );
   
-  // console.log("child fragments ", fragData.data);
-  const frags = fragData.data as Stars_stargazers$data
+const frags = fragData.data as Stars_stargazers$data
   return (
     <div className="w-full h-full flex-center-col">
       {frags.stargazers.edges?.map((stg, idx) => {
@@ -49,7 +36,7 @@ export const Stars: React.FC<StarsProps> = ({
       })}
  {
   fragData.isLoadingNext?
-  <div className="w-full h-full">
+  <div className="w-full flex-center">
     loading more...
   </div>:null
  }     
@@ -68,52 +55,7 @@ export const Stars: React.FC<StarsProps> = ({
   );
 };
 
-// // AuthorDetails.react.js
-// export const StarsFragment = graphql`
-// fragment Stars_stars on StargazerConnection{
-//     edges{
-//     cursor
-//      node{
-//       name
-//       email
-//       avatarUrl
-//     }
-//     }
-//     pageInfo{
-//         endCursor
-//         hasNextPage
-//         hasPreviousPage
-//         startCursor
-//   }
 
-//   }
-// `
-
-// export const StarsPagFragment = graphql`
-// fragment Stars_stars on Repository
-//   @argumentDefinitions(
-//      first: { type: "String" }
-//      after: { type: "Int", defaultValue: 10 }
-//   )
-//   @refetchable(queryName: "StarsPaginationQuery") {
-//     stargazers(first: $first, after: $after)  @connection(key: "Stars_stars"){
-//       edges {
-//       cursor
-//     node {
-//         name
-//         email
-//         avatarUrl
-//       }
-//
-//   pageInfo {
-//       endCursor
-//       hasNextPage
-//       hasPreviousPage
-//       startCursor
-//     }
-//   }
-
-// `
 
 const StarGazersFragment = graphql`
   fragment Stars_stargazers on Repository

@@ -14,6 +14,9 @@ import { App_user$data } from './__generated__/App_user.graphql';
 import { Profile } from './components/people/Profile';
 import RelayEnvironment from './relay/RelayEnviroment'
 import { AppPROFILEVIEWERQuery } from './__generated__/AppPROFILEVIEWERQuery.graphql';
+import { FULLREPO, Onerepo } from './components/repo/onerepo';
+import { OnerepoFullRepoQuery } from './components/repo/__generated__/onerepoFullRepoQuery.graphql';
+
 
 
 interface AppProps {
@@ -57,6 +60,24 @@ return (
          ] 
     
          },
+        { path: "repo",
+          children:[
+        { 
+          path:":repoId",
+          loader: async ({ params: { repoId } }) => {
+          const repovars = repoId.split('--')
+          const reponame = repovars[0] 
+          const repoowner = repovars[2] 
+            return (
+            {
+            repoQueryRef: loadQuery<OnerepoFullRepoQuery>(
+              RelayEnvironment,FULLREPO, {reponame,repoowner }
+            )
+          })},
+         element: <Onerepo /> }
+        ]
+        
+        },
         { path: "test", element: <Test /> },
       ]}
      >
@@ -65,7 +86,7 @@ return (
       <Toolbar avatarUrl={response.avatarUrl} />
       </div>
         
-      <div className="mt-[55px] w-full h-[90%]">
+      <div className="mt-[55px] w-full ">
       <Outlet />
       </div>
        

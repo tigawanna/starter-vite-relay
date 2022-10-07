@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<b4ed584fce20d3b225836508f7aa70e9>>
+ * @generated SignedSource<<9f524d33e81d95c92d6ee9d7923a7a19>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,20 +10,20 @@
 
 import { ConcreteRequest, Query } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type onerepoFullRepoQuery$variables = {
+export type OnerepoFullRepoQuery$variables = {
   reponame: string;
   repoowner: string;
 };
-export type onerepoFullRepoQuery$data = {
+export type OnerepoFullRepoQuery$data = {
   readonly repository: {
     readonly forkCount: number;
     readonly nameWithOwner: string;
     readonly " $fragmentSpreads": FragmentRefs<"Branches_refs" | "Stars_stargazers">;
   } | null;
 };
-export type onerepoFullRepoQuery = {
-  response: onerepoFullRepoQuery$data;
-  variables: onerepoFullRepoQuery$variables;
+export type OnerepoFullRepoQuery = {
+  response: OnerepoFullRepoQuery$data;
+  variables: OnerepoFullRepoQuery$variables;
 };
 
 const node: ConcreteRequest = (function(){
@@ -174,7 +174,7 @@ return {
     ],
     "kind": "Fragment",
     "metadata": null,
-    "name": "onerepoFullRepoQuery",
+    "name": "OnerepoFullRepoQuery",
     "selections": [
       {
         "alias": null,
@@ -210,7 +210,7 @@ return {
       (v0/*: any*/)
     ],
     "kind": "Operation",
-    "name": "onerepoFullRepoQuery",
+    "name": "OnerepoFullRepoQuery",
     "selections": [
       {
         "alias": null,
@@ -467,16 +467,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "fea8534faa0bb5d8a1da489e29d7fe41",
+    "cacheID": "139df2d19b9b49e2ccb577415284e263",
     "id": null,
     "metadata": {},
-    "name": "onerepoFullRepoQuery",
+    "name": "OnerepoFullRepoQuery",
     "operationKind": "query",
-    "text": "query onerepoFullRepoQuery(\n  $repoowner: String!\n  $reponame: String!\n) {\n  repository(owner: $repoowner, name: $reponame) {\n    nameWithOwner\n    forkCount\n    ...Stars_stargazers\n    ...Branches_refs\n    id\n  }\n}\n\nfragment Branches_refs on Repository {\n  refs(refPrefix: \"refs/heads/\", orderBy: {direction: DESC, field: TAG_COMMIT_DATE}, first: 3) {\n    edges {\n      node {\n        name\n        id\n        target {\n          __typename\n          ...Commits_history\n          id\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment Commits_history on Commit {\n  history(first: 5) {\n    edges {\n      node {\n        committedDate\n        author {\n          name\n          email\n        }\n        message\n        url\n        pushedDate\n        authoredDate\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n    totalCount\n  }\n  id\n}\n\nfragment Stars_stargazers on Repository {\n  stargazers(first: 5) {\n    edges {\n      cursor\n      node {\n        name\n        email\n        avatarUrl\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  id\n}\n"
+    "text": "query OnerepoFullRepoQuery(\n  $repoowner: String!\n  $reponame: String!\n) {\n  repository(owner: $repoowner, name: $reponame) {\n    nameWithOwner\n    forkCount\n    ...Stars_stargazers\n    ...Branches_refs\n    id\n  }\n}\n\nfragment Branches_refs on Repository {\n  refs(refPrefix: \"refs/heads/\", orderBy: {direction: DESC, field: TAG_COMMIT_DATE}, first: 3) {\n    edges {\n      node {\n        name\n        id\n        target {\n          __typename\n          ...Commits_history\n          id\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment Commits_history on Commit {\n  history(first: 5) {\n    edges {\n      node {\n        committedDate\n        author {\n          name\n          email\n        }\n        message\n        url\n        pushedDate\n        authoredDate\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n    totalCount\n  }\n  id\n}\n\nfragment Stars_stargazers on Repository {\n  stargazers(first: 5) {\n    edges {\n      cursor\n      node {\n        name\n        email\n        avatarUrl\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  id\n}\n"
   }
 };
 })();
 
-(node as any).hash = "28c99e01621defc9b71c1f1281a846f7";
+(node as any).hash = "3d25d8accdeaf8c4962eae714e25f429";
 
 export default node;

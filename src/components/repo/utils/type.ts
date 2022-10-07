@@ -34,7 +34,14 @@ export interface REPONODE {
   forkCount: number;
   languages: Languages;
   refs: Refs;
+  owner: Owner;
   stargazers: { totalCount: number};
+}
+export interface Owner {
+  login: string;
+  id: string;
+  url: string;
+  avatarUrl: string;
 }
 
 export interface Refs {

@@ -1,8 +1,11 @@
 import React from "react";
+import { RiArrowDropDownLine } from "react-icons/ri";
 import {
   graphql,
   usePaginationFragment,
 } from "react-relay/hooks";
+import { FragmentRefs } from "relay-runtime";
+import { TheIcon } from "../Shared/TheIcon";
 import { Commits } from "./Commits";
 import { BranchesPaginationQuery } from "./__generated__/BranchesPaginationQuery.graphql";
 import {
@@ -22,33 +25,22 @@ export const Branches: React.FC<
   const branches = fragData.data as Branches_refs$data;
 
   return (
-    <div className="w-full h-full flex flex-col">
+    <div className="w-full h-full flex flex-col justify-start items-center">
       <div className="w-full  flex-center text-lg font-semibold">
         Branches
       </div>
-      <div className="w-full flex-center-col">
+      <div className="w-full  flex-center-col">
+    
         {branches?.refs?.edges?.map(
           (branch, index) => {
             return (
-              <div
-                key={index}
-                className="w-full  flex-center-col text-lg font-semibold"
-              >
-                <div className="w-full  flex-center text-lg font-semibold">
-                  Branch {branch?.node?.name}
-                </div>
-                <div className="w-full ">
-                  <Commits
-                    data={branch?.node?.target}
-                  />
-                </div>
-              </div>
+            <Branch branch={branch} key={branch?.node?.id}/>
             );
           }
         )}
       </div>
       {fragData.isLoadingNext ? (
-        <div className="w-full h-full">
+        <div className="w-full flex-center">
           loading more...
         </div>
       ) : null}
@@ -67,6 +59,46 @@ export const Branches: React.FC<
     </div>
   );
 };
+
+
+
+
+
+interface BranchProps {
+  branch: {
+    readonly node: {
+      readonly id: string;
+      readonly name: string;
+      readonly target: {
+        readonly " $fragmentSpreads": FragmentRefs<"Commits_history">;
+      } | null;
+    } | null;
+  } | null
+}
+
+export const Branch: React.FC<BranchProps> = ({branch}) => {
+const [open, setOpen] = React.useState(false)
+return (
+  <div className="w-[97%] flex-col-center p-2 m-1 border-2 ">
+    <div className="w-[100%]  flex items-center justify-between">
+      <div className="text-lg  font-mono font-bold ">
+        {branch?.node?.name}{" "} branch
+      </div>
+
+      <TheIcon Icon={RiArrowDropDownLine} size={"40"} color={"blue"}
+        iconAction={() => setOpen(!open)}
+        iconstyle={"mx-2 hover:border hover:border-purple-900 rounded-[50%]"} />
+    </div>
+
+    {open ? <div className="w-full ">
+      <Commits
+        data={branch?.node?.target}
+      />
+    </div> : null}
+
+  </div>
+);
+}
 
 export const Branchesfragment = graphql`
   fragment Branches_refs on Repository

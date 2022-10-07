@@ -16,7 +16,7 @@ interface StarsProps {
 export const Stars: React.FC<StarsProps> = ({
   data,
 }) => {
-  console.log("data == in child", data);
+  // console.log("data == in child", data);
 
 // @ts-ignore 
   const fragData = usePaginationFragment<StarsPaginationQuery,_>(
@@ -24,7 +24,7 @@ export const Stars: React.FC<StarsProps> = ({
       data
     );
   
-  console.log("child fragments ", fragData.data);
+  // console.log("child fragments ", fragData.data);
   const frags = fragData.data as Stars_stargazers$data
   return (
     <div className="w-full h-full flex-center-col">

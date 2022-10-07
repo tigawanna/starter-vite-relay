@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<2c17cf86c1b6f941bbb238c45fea597d>>
+ * @generated SignedSource<<05ac8fe248b01132f52105fa9e391677>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -91,6 +91,13 @@ v7 = {
   "args": null,
   "kind": "ScalarField",
   "name": "name",
+  "storageKey": null
+},
+v8 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "url",
   "storageKey": null
 };
 return {
@@ -189,13 +196,7 @@ return {
                             "name": "diskUsage",
                             "storageKey": null
                           },
-                          {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "url",
-                            "storageKey": null
-                          },
+                          (v8/*: any*/),
                           {
                             "alias": null,
                             "args": null,
@@ -208,6 +209,34 @@ return {
                             "args": null,
                             "kind": "ScalarField",
                             "name": "forkCount",
+                            "storageKey": null
+                          },
+                          {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": null,
+                            "kind": "LinkedField",
+                            "name": "owner",
+                            "plural": false,
+                            "selections": [
+                              (v4/*: any*/),
+                              {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "login",
+                                "storageKey": null
+                              },
+                              (v5/*: any*/),
+                              (v8/*: any*/),
+                              {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "avatarUrl",
+                                "storageKey": null
+                              }
+                            ],
                             "storageKey": null
                           },
                           {
@@ -478,16 +507,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "b3b7576287b3465a87d6971058acc097",
+    "cacheID": "c33c9fe5aa7ea2acf8c87e490ef2ac15",
     "id": null,
     "metadata": {},
     "name": "RepositoriesPaginationQuery",
     "operationKind": "query",
-    "text": "query RepositoriesPaginationQuery(\n  $after: String\n  $first: Int = 10\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...Repositories_repositories_2HEEH6\n    id\n  }\n}\n\nfragment Repositories_repositories_2HEEH6 on User {\n  repositories(first: $first, after: $after, orderBy: {field: PUSHED_AT, direction: DESC}) {\n    edges {\n      node {\n        id\n        name\n        description\n        pushedAt\n        diskUsage\n        url\n        visibility\n        forkCount\n        languages(first: $first) {\n          edges {\n            node {\n              id\n              color\n              name\n            }\n          }\n        }\n        refs(refPrefix: \"refs/heads/\", orderBy: {direction: DESC, field: TAG_COMMIT_DATE}, first: 2) {\n          edges {\n            node {\n              name\n              id\n              target {\n                __typename\n                ... on Commit {\n                  history(first: 1) {\n                    edges {\n                      node {\n                        committedDate\n                        author {\n                          name\n                        }\n                        message\n                        id\n                      }\n                    }\n                  }\n                }\n                id\n              }\n            }\n          }\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n    totalCount\n  }\n  id\n}\n"
+    "text": "query RepositoriesPaginationQuery(\n  $after: String\n  $first: Int = 10\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ...Repositories_repositories_2HEEH6\n    id\n  }\n}\n\nfragment Repositories_repositories_2HEEH6 on User {\n  repositories(first: $first, after: $after, orderBy: {field: PUSHED_AT, direction: DESC}) {\n    edges {\n      node {\n        id\n        name\n        description\n        pushedAt\n        diskUsage\n        url\n        visibility\n        forkCount\n        owner {\n          __typename\n          login\n          id\n          url\n          avatarUrl\n        }\n        languages(first: $first) {\n          edges {\n            node {\n              id\n              color\n              name\n            }\n          }\n        }\n        refs(refPrefix: \"refs/heads/\", orderBy: {direction: DESC, field: TAG_COMMIT_DATE}, first: 2) {\n          edges {\n            node {\n              name\n              id\n              target {\n                __typename\n                ... on Commit {\n                  history(first: 1) {\n                    edges {\n                      node {\n                        committedDate\n                        author {\n                          name\n                        }\n                        message\n                        id\n                      }\n                    }\n                  }\n                }\n                id\n              }\n            }\n          }\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n    totalCount\n  }\n  id\n}\n"
   }
 };
 })();
 
-(node as any).hash = "98d59085c1b71ce7465ccf4fa9375011";
+(node as any).hash = "31ed69820361d385cf78fe2fad3e438d";
 
 export default node;

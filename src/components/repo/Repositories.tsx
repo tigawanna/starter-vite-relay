@@ -18,6 +18,7 @@ import { FragmentRefs,graphql } from "relay-runtime";
 import { usePaginationFragment } from "react-relay";
 import { RepositoriesPaginationQuery } from "./__generated__/RepositoriesPaginationQuery.graphql";
 import { Repositories_repositories$data } from "./__generated__/Repositories_repositories.graphql";
+import { Link } from "@tanstack/react-location";
 
 dayjs.extend(relativeTime);
 interface RepositoryProps {
@@ -111,7 +112,7 @@ interface RepoCardProps {
 export const RepoCard: React.FC<
   RepoCardProps
 > = ({ repo }) => {
-  // console.log(repo.html_url)
+  // console.log("repo    ===  ",repo)
   // const repo_link = authedurl(repo.html_url,token)
   const vslink = `https://vscode.dev/${repo.url}`;
 
@@ -123,10 +124,12 @@ export const RepoCard: React.FC<
       <div
         onClick={() => {}}
         className=" flex-col items-center  justify-between  cursor-pointer h-[90%] w-full"
-      >
+       >
+        <Link to={'/repo/' + repo.name + "--```--" + repo.owner.login}>
         <div className="text-[20px] font-semibold md:text-xl md:font-bold  break-all ">
           {repo?.name}
         </div>
+     
         <div className="flex flex-wrap text-color">
           {repo?.languages.edges.map((item) => {
             return (
@@ -145,6 +148,8 @@ export const RepoCard: React.FC<
             );
           })}
         </div>
+        </Link>
+
         <div className="text-[14px] md:text-[11px] break-word  max-h-[45%] overflow-y-clip ">
           {repo?.description}
         </div>
@@ -263,6 +268,12 @@ export const RepositoriesFragment = graphql`
           url
           visibility
           forkCount
+          owner {
+            login
+            id
+            url
+            avatarUrl
+          }
 
           languages(first: $first) {
             edges {

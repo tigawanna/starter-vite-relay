@@ -38,7 +38,6 @@ class ErrorBoundary extends Component<Props, State> {
         // console.log("error boundary =",this.state.error)
     
 
-        console.log(local)
         if (this.state.hasError) {
             if (this.state.error?.message === "Bad credentials" ) {
                 if (!this.state.token) { return <Login /> }

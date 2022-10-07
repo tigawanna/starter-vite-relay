@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<37be7d09f4ecc2af8dfa87487fa46439>>
+ * @generated SignedSource<<675d638f1a1d15fc61c7e530fc36cd1a>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -30,6 +30,12 @@ export type Repositories_repositories$data = {
           } | null> | null;
         } | null;
         readonly name: string;
+        readonly owner: {
+          readonly avatarUrl: any;
+          readonly id: string;
+          readonly login: string;
+          readonly url: any;
+        };
         readonly pushedAt: any | null;
         readonly refs: {
           readonly edges: ReadonlyArray<{
@@ -89,6 +95,13 @@ v2 = {
   "args": null,
   "kind": "ScalarField",
   "name": "name",
+  "storageKey": null
+},
+v3 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "url",
   "storageKey": null
 };
 return {
@@ -188,13 +201,7 @@ return {
                   "name": "diskUsage",
                   "storageKey": null
                 },
-                {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "url",
-                  "storageKey": null
-                },
+                (v3/*: any*/),
                 {
                   "alias": null,
                   "args": null,
@@ -207,6 +214,33 @@ return {
                   "args": null,
                   "kind": "ScalarField",
                   "name": "forkCount",
+                  "storageKey": null
+                },
+                {
+                  "alias": null,
+                  "args": null,
+                  "concreteType": null,
+                  "kind": "LinkedField",
+                  "name": "owner",
+                  "plural": false,
+                  "selections": [
+                    {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "login",
+                      "storageKey": null
+                    },
+                    (v1/*: any*/),
+                    (v3/*: any*/),
+                    {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "avatarUrl",
+                      "storageKey": null
+                    }
+                  ],
                   "storageKey": null
                 },
                 {
@@ -470,6 +504,6 @@ return {
 };
 })();
 
-(node as any).hash = "98d59085c1b71ce7465ccf4fa9375011";
+(node as any).hash = "31ed69820361d385cf78fe2fad3e438d";
 
 export default node;

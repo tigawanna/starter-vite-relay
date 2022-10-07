@@ -55,6 +55,11 @@ return (
         <Link to="/test">
          test
         </Link>
+        <div> {"  "}</div>
+        <Link to="/repo/tsconfig.json--```--benawad">
+          repo
+        </Link>
+        <div> {"  "}</div>
         <Link to="/profile/oswhytecodes">
           profile
         </Link>

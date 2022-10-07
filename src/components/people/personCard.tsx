@@ -121,7 +121,7 @@ export const FOLLOWUSER = graphql`
   mutation PersonCardfollowMutation($input: FollowUserInput!) {
     followUser(input: $input) {
       clientMutationId
-    }
+     }
   }
 `;
 

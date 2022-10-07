@@ -52,7 +52,7 @@ return (
       {/* test */}
 
       <div className="w-fit p-1  flex-center ">
-        <Link to="/test">
+        {/* <Link to="/test">
          test
         </Link>
         <div> {"  "}</div>
@@ -62,7 +62,7 @@ return (
         <div> {"  "}</div>
         <Link to="/profile/oswhytecodes">
           profile
-        </Link>
+        </Link> */}
 
         <div
           onClick={() => setOpen(true)}

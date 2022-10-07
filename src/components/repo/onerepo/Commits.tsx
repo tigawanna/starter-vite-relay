@@ -36,7 +36,7 @@ export const Commits: React.FC<CommitsProps> = ({
       {!fragData.isLoadingNext &&
       fragData.hasNext ? (
         <button
-          className="m-2 hover:text-purple-400 shadow-lg hover:shadow-purple"
+          className="m-2 hover:text-purple-900 shadow-lg hover:shadow-purple"
           onClick={() => {
             fragData.loadNext(5);
           }}
@@ -76,13 +76,13 @@ return (
   <div
     className="w-full p-1 m-1 border rounded flex items-center  flex-wrap">
 
-    <div className="w-fit mx-1  font-bold text-purple-100">
+    <div className="w-fit mx-1  font-bold text-purple-900 dark:text-purple-200">
       {commit?.node?.author?.name}</div>
     <div className="w-fit text-sm p-1">
       {dayjs(commit?.node?.committedDate).fromNow()}
     </div>
 
-    <div className="w-fit  m-1 font-serif break-all text-purple-200 text-sm">
+    <div className="w-fit  m-1 font-serif break-all text-purple-900 dark:text-purple-200 text-sm">
       {commit?.node?.message}
     </div>
     <div className="p-1 flex">

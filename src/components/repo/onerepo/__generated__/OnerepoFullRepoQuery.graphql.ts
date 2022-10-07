@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<9f524d33e81d95c92d6ee9d7923a7a19>>
+ * @generated SignedSource<<df9a19f2d193d03460522c07868621f4>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -18,7 +18,7 @@ export type OnerepoFullRepoQuery$data = {
   readonly repository: {
     readonly forkCount: number;
     readonly nameWithOwner: string;
-    readonly " $fragmentSpreads": FragmentRefs<"Branches_refs" | "Stars_stargazers">;
+    readonly " $fragmentSpreads": FragmentRefs<"Branches_refs" | "Languages_languages" | "Stars_stargazers">;
   } | null;
 };
 export type OnerepoFullRepoQuery = {
@@ -165,7 +165,14 @@ v14 = [
     "name": "refPrefix",
     "value": "refs/heads/"
   }
-];
+],
+v15 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "totalCount",
+  "storageKey": null
+};
 return {
   "fragment": {
     "argumentDefinitions": [
@@ -195,6 +202,11 @@ return {
             "args": null,
             "kind": "FragmentSpread",
             "name": "Branches_refs"
+          },
+          {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "Languages_languages"
           }
         ],
         "storageKey": null
@@ -399,13 +411,7 @@ return {
                                     "storageKey": null
                                   },
                                   (v13/*: any*/),
-                                  {
-                                    "alias": null,
-                                    "args": null,
-                                    "kind": "ScalarField",
-                                    "name": "totalCount",
-                                    "storageKey": null
-                                  }
+                                  (v15/*: any*/)
                                 ],
                                 "storageKey": "history(first:5)"
                               },
@@ -460,6 +466,61 @@ return {
             "key": "Branches_refs",
             "kind": "LinkedHandle",
             "name": "refs"
+          },
+          {
+            "alias": null,
+            "args": (v5/*: any*/),
+            "concreteType": "LanguageConnection",
+            "kind": "LinkedField",
+            "name": "languages",
+            "plural": false,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "LanguageEdge",
+                "kind": "LinkedField",
+                "name": "edges",
+                "plural": true,
+                "selections": [
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Language",
+                    "kind": "LinkedField",
+                    "name": "node",
+                    "plural": false,
+                    "selections": [
+                      (v9/*: any*/),
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "color",
+                        "storageKey": null
+                      },
+                      (v7/*: any*/),
+                      (v10/*: any*/)
+                    ],
+                    "storageKey": null
+                  },
+                  (v6/*: any*/)
+                ],
+                "storageKey": null
+              },
+              (v13/*: any*/),
+              (v15/*: any*/)
+            ],
+            "storageKey": "languages(first:5)"
+          },
+          {
+            "alias": null,
+            "args": (v5/*: any*/),
+            "filters": null,
+            "handle": "connection",
+            "key": "Languages_languages",
+            "kind": "LinkedHandle",
+            "name": "languages"
           }
         ],
         "storageKey": null
@@ -467,16 +528,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "139df2d19b9b49e2ccb577415284e263",
+    "cacheID": "382e648c1ecab81734f269dc9ded7920",
     "id": null,
     "metadata": {},
     "name": "OnerepoFullRepoQuery",
     "operationKind": "query",
-    "text": "query OnerepoFullRepoQuery(\n  $repoowner: String!\n  $reponame: String!\n) {\n  repository(owner: $repoowner, name: $reponame) {\n    nameWithOwner\n    forkCount\n    ...Stars_stargazers\n    ...Branches_refs\n    id\n  }\n}\n\nfragment Branches_refs on Repository {\n  refs(refPrefix: \"refs/heads/\", orderBy: {direction: DESC, field: TAG_COMMIT_DATE}, first: 3) {\n    edges {\n      node {\n        name\n        id\n        target {\n          __typename\n          ...Commits_history\n          id\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment Commits_history on Commit {\n  history(first: 5) {\n    edges {\n      node {\n        committedDate\n        author {\n          name\n          email\n        }\n        message\n        url\n        pushedDate\n        authoredDate\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n    totalCount\n  }\n  id\n}\n\nfragment Stars_stargazers on Repository {\n  stargazers(first: 5) {\n    edges {\n      cursor\n      node {\n        name\n        email\n        avatarUrl\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  id\n}\n"
+    "text": "query OnerepoFullRepoQuery(\n  $repoowner: String!\n  $reponame: String!\n) {\n  repository(owner: $repoowner, name: $reponame) {\n    nameWithOwner\n    forkCount\n    ...Stars_stargazers\n    ...Branches_refs\n    ...Languages_languages\n    id\n  }\n}\n\nfragment Branches_refs on Repository {\n  refs(refPrefix: \"refs/heads/\", orderBy: {direction: DESC, field: TAG_COMMIT_DATE}, first: 3) {\n    edges {\n      node {\n        name\n        id\n        target {\n          __typename\n          ...Commits_history\n          id\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment Commits_history on Commit {\n  history(first: 5) {\n    edges {\n      node {\n        committedDate\n        author {\n          name\n          email\n        }\n        message\n        url\n        pushedDate\n        authoredDate\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n    totalCount\n  }\n  id\n}\n\nfragment Languages_languages on Repository {\n  languages(first: 5) {\n    edges {\n      node {\n        id\n        color\n        name\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n    totalCount\n  }\n  id\n}\n\nfragment Stars_stargazers on Repository {\n  stargazers(first: 5) {\n    edges {\n      cursor\n      node {\n        name\n        email\n        avatarUrl\n        id\n        __typename\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n      hasPreviousPage\n      startCursor\n    }\n  }\n  id\n}\n"
   }
 };
 })();
 
-(node as any).hash = "3d25d8accdeaf8c4962eae714e25f429";
+(node as any).hash = "acf005f862ae8c261a028c15e8af62a1";
 
 export default node;

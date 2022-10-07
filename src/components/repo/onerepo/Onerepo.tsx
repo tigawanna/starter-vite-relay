@@ -5,6 +5,7 @@ import { Branches } from './Branches';
 import { MakeGenerics, useMatch } from '@tanstack/react-location';
 import { OnerepoFullRepoQuery } from '../__generated__/onerepoFullRepoQuery.graphql';
 import { Stars } from './Stars';
+import { Languages } from './Languages';
 
 
 interface onerepoProps {
@@ -18,32 +19,25 @@ type LocationGenerics = MakeGenerics<{
 
 export const Onerepo: React.FC<onerepoProps> = ({}) => {
 const stuff = useMatch<LocationGenerics>();
-
-  // const data = useLazyLoadQuery<OnerepoFullRepoQuery>(FULLREPO,{
-  //   reponame:"tsconfig.json",
-  //   repoowner: "benawad",
-  // });
-
-  const data =
+const data =
     usePreloadedQuery<OnerepoFullRepoQuery>(
       FULLREPO,
       //@ts-ignore
       stuff.data.repoQueryRef
     );
 
-// console.log("one repo query == ",data)
-
 return (
 <div className='w-full   h-full flex-col-center '>
-    <div className='w-full flex-center p-5'>
-    <div className='text-lg font-semibold flex-center p-5'>
+    <div className='w-full md:flex-center'>
+    <div className='text-lg font-semibold flex-center p-1'>
         {data.repository?.nameWithOwner}
     </div>
-    <div className='text-lg font-semibold flex-center p-5'>
-      {data.repository?.forkCount}
+    <div className='w-full text-lg  flex-center p-1'>
+        <Languages data={data.repository} />
     </div>
     </div>
     <div className='w-full flex-center-col p-5 h-full'>
+ 
       <Branches data={data.repository}/>
       <Stars data={data.repository}/>
 
@@ -65,9 +59,7 @@ export const FULLREPO = graphql`
     ...Stars_stargazers
     ...Branches_refs
     ...Languages_languages
-    # stargazers(after:$after,first:$first)  @connection(key: "Stars_stargazers"){
-    #   ...Stars_stars
-    # }
+
    }
   }
 `;

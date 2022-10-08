@@ -23,7 +23,7 @@ export const Commits: React.FC<CommitsProps> = ({
       {commits.history.edges?.map(
         (commit, index) => {
           return (
-              <Commit commit={commit}/>
+              <Commit commit={commit} key={commit?.node?.pushedDate + index}/>
           );
         }
       )}

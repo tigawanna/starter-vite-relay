@@ -11,14 +11,11 @@ import {
 } from 'react-relay/hooks';
 import RelayEnvironment from './relay/RelayEnviroment'
 import { LoadingShimmer } from './components/Shared/LoadingShimmer';
-import { useLocalStoreValues } from './store';
 import { AppROOTVIEWERQuery } from './__generated__/AppROOTVIEWERQuery.graphql';
 import ErrorBoundary from './components/Shared/ErrorBoundary';
 import { useCheckToken } from './utils/useCheckToken';
 import { Login } from './components/auth/Login';
 import { QueryClient, QueryClientProvider } from "react-query";
-
-const {localValues} = useLocalStoreValues.getState()
 
 interface MainViewProps {
   isLoggedIn: boolean

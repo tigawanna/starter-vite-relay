@@ -30,11 +30,11 @@ const tabsData = useLazyLoadQuery<HomeVIEWERQuery>(HomeViewerQuery, {});
 //  console.log("response viewer info == ",viewer_info)
 
 const response = data as Home_user$data
- const tabs = [
-    ['repo', response?.following?.totalCount],
-    ['followers', response?.followers?.totalCount], 
-    ['following', response?.repositories?.totalCount]
-]
+  const tabs = [
+    ["repo", response?.repositories?.totalCount],
+    ["followers",response?.followers?.totalCount],
+    ["following",response?.following?.totalCount],
+  ];
 
 const refs= tabsData.viewer
 return (
@@ -45,7 +45,7 @@ return (
 
         <div className="min-h-[80%] flex flex-col justify-start">
         <div className="w-full flex items-center justify-evenly 
-           sticky z-30 top-[50px] dark:bg-slate-700 bg-white text-xl">
+           sticky z-20 top-[50px] dark:bg-slate-700 bg-white text-xl">
                 {tabs.map((item, index) => {
                     return (
                         <TabItem

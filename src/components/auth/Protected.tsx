@@ -9,7 +9,7 @@ children:ReactNode
 //@ts-ignore
 export const Protected: React.FC<ProtectedProps> = ({children}) => {
     const {localValues} = useLocalStoreValues()
-    console.log("logged in ? == ",localValues.token)
+    // console.log("logged in ? == ",localValues.token)
     if(!localValues.token){
         return (<Navigate to='/login' replace />)
     }

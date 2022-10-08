@@ -7,8 +7,10 @@ import { MdCorporateFare } from "react-icons/md";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { TheIcon } from "../Shared/TheIcon";
 import { FragmentRefs, graphql } from "relay-runtime";
-import { useFragment } from "react-relay";
+import { useFragment, useMutation } from "react-relay";
 import { ProfileInfo_user$data } from "./__generated__/ProfileInfo_user.graphql";
+import { ProfileInfounfollowMutation } from "./__generated__/ProfileInfounfollowMutation.graphql";
+import { ProfileInfofollowMutation } from "./__generated__/ProfileInfofollowMutation.graphql";
 dayjs.extend(relativeTime);
 
 interface ProfileInfoProps {
@@ -35,19 +37,19 @@ const data = useFragment(ProfileInfoVIEWERfragmant, refs);
 
 
   const [yes, setYes] = useState<any>(user?.viewerIsFollowing);
+  const [followMutation, isFollowMutationInFlight] = useMutation<ProfileInfofollowMutation>(FOLLOWUSER)
+  const [unfollowMutation, isUnFollowMutationInFlight] = useMutation<ProfileInfounfollowMutation>(UNFOLLOWUSER)
   const [active, setActive] = useState<string>("");
   const username = user?.login as string;
   const admin = user?.isViewer;
   //console.log("og user",admin)
   const followThem = (their_id: string) => {
     setYes(true);
-    // followUser(their_name, token);
-      //  followMutation.mutate({input:{userId:their_id}})
+    followMutation({ variables: { input: { userId: their_id } } })
   };
   const unfollowThem = (their_id: string) => {
     setYes(false);
-    // unfollowUser(their_name, token);
-        // unfollowMutation.mutate({input:{userId:their_id}})
+    unfollowMutation({ variables: { input: { userId: their_id } } })
   };
 
   // console.log("main user === ",user)
@@ -195,4 +197,21 @@ export const ProfileInfoVIEWERfragmant = graphql`
     url
    
   }
+`;
+
+
+export const FOLLOWUSER = graphql`
+  mutation ProfileInfofollowMutation($input: FollowUserInput!) {
+    followUser(input: $input) {
+      clientMutationId
+     }
+  }
+`;
+
+export const UNFOLLOWUSER = graphql`
+mutation ProfileInfounfollowMutation($input:UnfollowUserInput!){
+  unfollowUser(input:$input){
+    clientMutationId
+  }
+}
 `;

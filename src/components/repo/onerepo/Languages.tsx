@@ -23,11 +23,11 @@ const fragData = usePaginationFragment<LanguagesPaginationQuery, any>(
             key={item?.node.id}
             style={{
               borderStyle: "solid",
-              borderWidth: "1px",
+              borderWidth: "2px",
               borderColor: item?.node.color??" ",
               borderRadius: "10%",
             }}
-            className="px-[1px] mx-[4px] text-[10px]  md:text-[12px]   break-all"
+            className="px-[2px] mx-[3px] text-[10px]  md:text-[12px] font-bold  break-all"
           >
             {item?.node.name}
           </div>

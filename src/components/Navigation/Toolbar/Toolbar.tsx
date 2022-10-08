@@ -16,6 +16,7 @@ import { GrHome } from "react-icons/gr";
 import { RiHome2Line } from "react-icons/ri";
 import { TheIcon } from './../../Shared/TheIcon';
 import { useTheme } from './../../../utils/useTheme';
+import { Search } from '../../search/Search';
 
 interface ToolbarProps {
 avatarUrl:string
@@ -46,6 +47,9 @@ return (
         </Link>
       </div>
       {/* theme toggle */}
+      <div className="w-[50%] md:w-[50%] p-1  flex-center">
+        <Search/>
+      </div>
       <div className="w-fit p-1  flex-center">
         <TheIcon Icon={mode} size={"25"} color={""} iconAction={toggle} />
       </div>

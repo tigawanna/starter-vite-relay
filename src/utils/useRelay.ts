@@ -11,7 +11,7 @@ export const useRelayHooks = (
       ROOTVIEWER,
       rootQueryRef
     );
-console.log(viewerData)
+// console.log(viewerData)
 if(!viewerData) return {error:"Bad things happened"}    
 
 return viewerData

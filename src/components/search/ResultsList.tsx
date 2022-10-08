@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-location';
 import React from 'react'
-import { SearchEdge, SearchNode } from './../../utils/types/searchtype';
+import { SearchEdge, SearchNode } from './types';
+
 
 
 
@@ -15,10 +16,14 @@ interface ResultsListProps {
 
 export const ResultsList: React.FC<ResultsListProps> = ({results,setKeyword}) => {
 return (
-  <div className="w-[100%] md:w-[60%] h-full flex flex-col items-center  overflow-y-scroll scroll-bar ">
+  <div className="w-[100%]  md:w-[60%] h-full flex flex-col items-center 
+   overflow-y-scroll scroll-bar z-50 overflow-x-hidden ">
     {results &&
       results.map((result, index) => {
-        return <ResultsCard result={result.node} setKeyword={setKeyword} key={index}/>;
+        if(result.node.login)
+        return (
+        <ResultsCard result={result.node} setKeyword={setKeyword} key={index}/>
+        );
       })}
   </div>
 );
@@ -42,12 +47,14 @@ export const ResultsCard: React.FC<ResultsCardProps> = ({result,setKeyword}) => 
   //  navigate(`/personprofile`, { state: { dev:result } });
  };    
 return (
-  <Link to={"/profile/" + result?.login}>
+  <Link 
+  className='w-full '
+  to={"/profile/" + result?.login}>
     <div
       onClick={() => navigateToProfile()}
     className="w-[100%] h-26 m-[2px] p-1 bg-slate-100 dark:bg-slate-800  rounded-lg 
-    shadow-slate-600 dark:shadow-white 
-      hover:bg-slate-200 dark:hover:bg-slate-900 shadow-sm cursor-pointer inline-flex"
+    shadow-slate-600 dark:shadow-white hover:bg-slate-200 dark:hover:bg-slate-900 
+    shadow-sm cursor-pointer flex-center"
     >
       <img
         className="h-[50px] w-[50px] rounded-[50%] m-1"

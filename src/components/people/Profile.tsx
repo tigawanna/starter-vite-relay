@@ -52,14 +52,14 @@ export const Profile: React.FC<
   );
   const response = tabsInfo as Profile_user$data;
   const tabs = [
-    ["repo", response?.following?.totalCount],
+    ["repo", response?.repositories?.totalCount],
     [
       "followers",
       response?.followers?.totalCount,
     ],
     [
       "following",
-      response?.repositories?.totalCount,
+      response?.following?.totalCount,
     ],
   ];
   const tabsData =
@@ -67,12 +67,9 @@ export const Profile: React.FC<
       ProfileViewerQuery,
       { login: response.login }
     );
-  const inffo = tabsData.user;
+ 
 
-  console.log(
-    "tabs info in profile === ",
-    tabsInfo
-  );
+
   return (
     <div className=" h-full flex flex-col justify-start">
       <div className="h-[20%]">
@@ -82,7 +79,7 @@ export const Profile: React.FC<
       <div className="min-h-[80%] flex flex-col justify-start">
         <div
           className="w-full flex items-center justify-evenly 
-           sticky z-30 top-[50px] dark:bg-slate-700 bg-white text-xl"
+           sticky z-20 top-[50px] dark:bg-slate-700 bg-white text-xl"
         >
           {tabs.map((item, index) => {
             return (

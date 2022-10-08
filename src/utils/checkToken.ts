@@ -54,7 +54,7 @@ export const checkToken = async({token}: T) => {
  return res   
    } catch (e) {
          //@ts-ignore
-     console.log(" viewer error === ", e.response);
+    //  console.log(" viewer error === ", e.response);
      //@ts-ignore
      updateMainUser({user: null,error: e.response});
      //@ts-ignore

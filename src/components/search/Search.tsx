@@ -1,9 +1,6 @@
-import React, { Suspense } from "react";
-import { useLazyLoadQuery } from "react-relay";
-import { graphql } from "relay-runtime";
+import React from "react";
 import { useGQLQuery } from "../../utils/gqlquery";
 import { SearchBox } from "./SearchBox";
-import { SearchQuery } from "./__generated__/SearchQuery.graphql";
 import { useLocalStoreValues } from './../../store';
 import { USERSEARCH } from "../../utils/user_query";
 import { SearchResult } from "./types";
@@ -17,7 +14,7 @@ export const Search: React.FC<
   const {localValues} =useLocalStoreValues()
   const token =  localValues.token as string
   const [keyword, setKeyword] = React.useState({
-    word: "tigawanna",
+    word: "",
   });
   const [validating, setValidating] = React.useState(true);
 

@@ -16,7 +16,7 @@ export const Layout: React.FC<LayoutProps> = ({}) => {
         };
     }>;
 const stuff =useMatch<LocationGenerics>()
-console.log("log === ",stuff.data.viewer)
+// console.log("log === ",stuff.data.viewer)
 return (
  <div className='w-full min-h-screen h-full flex flex-col justify-between
    dark:bg-slate-800 dark:text-white transition ease-linear delay-100 

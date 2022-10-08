@@ -64,7 +64,7 @@ const action = () => {
       />
     </div> */}
 
-      <div className="w-full flex-center sticky top-[20%] z-20">
+      <div className="w-full flex-center sticky top-[15%] z-20">
         <div className="w-fit flex-center p-[2px] font-bold bg-white dark:bg-slate-900">
           {totalReposloaded}/
           {repos.repositories.totalCount}

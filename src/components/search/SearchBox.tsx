@@ -3,7 +3,8 @@ import { IconContext } from "react-icons";
 import { FaSearch , FaTimes} from "react-icons/fa";
 import { ResultsList } from "./ResultsList";
 import { UseQueryResult } from "react-query";
-import { SearchEdge, SearchResult } from './../../utils/types/searchtype';
+import { SearchEdge } from "./types";
+
 
 interface SearchBoxProps {
   keyword: { word: string };
@@ -37,9 +38,9 @@ export const SearchBox: React.FC<SearchBoxProps> = ({
     action();
   };
   return (
-    <div className="w-full  h-fit p-[2px] flex flex-col items-center justify-center md:justify-end ">
-      <form onSubmit={handleSubmit} className="w-full flex items-center  justify-center md:justify-end">
-        <div className="flex-center w-[80%] md:w-[50%] border-black border rounded-md ">
+    <div className="w-full  h-fit p-[2px] flex flex-col items-center justify-center  z-50">
+      <form  className="w-full flex items-center  justify-center ">
+        <div className="flex-center w-[100%] md:w-[50%] border-black border rounded-md ">
           <input
             className="w-[100%]  p-[5px] md:p-1 mx-1 dark:bg-slate-700  
             mr-2 "
@@ -57,9 +58,9 @@ export const SearchBox: React.FC<SearchBoxProps> = ({
               }}
             >
               {results?.length > 0 || keyword.word !== "" ? (
-                <FaTimes />
+                <FaTimes onClick={()=>action()}/>
               ) : (
-                <FaSearch />
+              null
               )}
             </IconContext.Provider>
           </button>
@@ -100,13 +101,14 @@ export const SearchBox: React.FC<SearchBoxProps> = ({
         </div>
       ) : null}
       {results && keyword.word !== "" && title !== "filter repo" ? (
+        <div className="fixed top-[50px] left-0 w-full h-full bg-slate-400 bg-opacity-40">
         <div
-          style={{ position: "fixed", top: "100px" }}
-          className=" w-[95%]  flex items-center justify-center 
-          md:justify-end h-[70%] fixed top-[15%] dark:text-white
-           dark:border-white dark:shaow-white "
+          className=" w-[90%] fixed top-[70px] left-[20px] flex items-center justify-center 
+          md:justify-start h-[70%]   dark:text-white
+           dark:border-white dark:shaow-white z-50 "
         >
           <ResultsList results={results} setKeyword={setKeyword} />
+        </div>
         </div>
       ) : null}
     </div>

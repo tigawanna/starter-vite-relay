@@ -34,7 +34,7 @@ export const Branches: React.FC<
         {branches?.refs?.edges?.map(
           (branch, index) => {
             return (
-            <Branch branch={branch} key={branch?.node?.id}/>
+            <Branch branch={branch} key={branch?.node?.id }/>
             );
           }
         )}
